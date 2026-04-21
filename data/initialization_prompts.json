@@ -1,0 +1,78 @@
+{
+    "Setting": "Peak Vista Lodge an Exclusive Ski Resort in Colorado - Snowed in due to Blizzard - No phone signal",
+    "Time": "Modern Day",
+    "Protagonist": {
+        "Name": "Professor Adrian Holt",
+        "Role": "The Amateur Sleuth / Cryptographer",
+        "Reason": "He is a professor of linguistics and ancient history who won a week-long, all-expenses-paid stay at the lodge in a national cryptography competition. He is a widower and has come with his teenage daughter who's a genius in her own right. He genuinely believes the old lodge holds a historical cipher he hopes to crack.",
+        "Connection": "His analytical mind and obsession with solving complex puzzles mean he is likely to be the first to notice inconsistencies or hidden patterns among the guests, making him an accidental investigator. He is completely unknown to the other guests."
+    },
+    "Characters": [
+        {
+            "Name": "Willow Holt",
+            "Role": "The Brilliant Companion / Technical Expert",
+            "Reason": "She is accompanying her father, Professor Holt, on his prize trip. Willow is a high school student who excels in applied mathematics, coding, and digital forensics. While her father focuses on historical ciphers, she uses modern tech to solve puzzles. She is largely indifferent to the resort's social aspects, preferring to be on her laptop.",
+            "Connection": "She is the Professor's dedicated, though sometimes exasperated, assistant. Her modern technological skills complement her father's old-world academic knowledge, providing the means to process and analyze data (like security footage or communications intercepts) that her father's methods can't touch."
+        },
+        {
+            "Name": "Elara Vance",
+            "Role": "The Proprietor",
+            "Reason": "She inherited the 'Peak Vista Lodge' from her eccentric uncle last year and is determined to make its centennial season a success, despite having no prior hospitality experience. She feels the weight of her family's legacy.",
+            "Connection": "She is the host and manager of the resort where everyone is trapped."
+        },
+        {
+            "Name": "Marcus 'Mac' Chen",
+            "Role": "The Disgraced Journalist",
+            "Reason": "He booked the trip under a pseudonym, seeking isolation and a break from the media frenzy following a career-ending professional mistake. He planned to write a book exposing a hidden corporate scandal.",
+            "Connection": "He is secretly trailing Sebastian Reed (Character 9) and believes a key source of information is also staying at the lodge."
+        },
+        {
+            "Name": "Dr. Evelyn Shaw",
+            "Role": "The Emergency Responder",
+            "Reason": "She is a trauma surgeon who was skiing nearby and was stranded on her way back to the city for a critical conference. She volunteered her services when the blizzard hit and realized the resort had limited medical staff.",
+            "Connection": "She is the estranged older sister of Liam Shaw (Character 7)."
+        },
+        {
+            "Name": "Silas Thorne",
+            "Role": "The Wealthy Investor",
+            "Reason": "He owns a substantial share in the corporation that funds the Peak Vista Lodge, and is there for an unscheduled, secretive 'inspection' to assess if the property is worth selling off after the season.",
+            "Connection": "He is the primary financial backer (and potential executioner) of Elara Vance's (Character 1) resort. He is also a former business partner of Octavia Sterling (Character 10)."
+        },
+        {
+            "Name": "Jasmine Khan",
+            "Role": "The Fleeing Artist",
+            "Reason": "She came to the remote resort seeking inspiration and anonymity after a high-profile breakup and a sudden, unwelcome burst of fame that she finds terrifying. She is trying to finish a commissioned painting.",
+            "Connection": "She is the fiancée of Leo Bellwether (Character 6), though their relationship is currently on a secret 'pause.'"
+        },
+        {
+            "Name": "Leo Bellwether",
+            "Role": "The Security Specialist",
+            "Reason": "He was hired by a nervous client to discreetly install a new, state-of-the-art security system at the resort, which must be completed before the blizzard lifts. He uses this technical job as an excuse to clear his head about his relationship.",
+            "Connection": "He is the fiancé of Jasmine Khan (Character 5). He is also the one who installed the surveillance system that Marcus Chen (Character 2) is trying to access."
+        },
+        {
+            "Name": "Liam Shaw",
+            "Role": "The Resort Chef",
+            "Reason": "He works year-round at the resort, having taken the job to escape the high-pressure fine-dining world and be closer to the mountains. He is deeply protective of the staff.",
+            "Connection": "He is the younger brother of Dr. Evelyn Shaw (Character 3). He is secretly in love with Elara Vance (Character 1)."
+        },
+        {
+            "Name": "Penelope 'Penny' Hayes",
+            "Role": "The Investigative Podcaster",
+            "Reason": "She rented a cabin outside the main lodge to conduct interviews for a new series focusing on missing persons in the Colorado mountains. She needs to interview a key witness who was expected to arrive via snowmobile.",
+            "Connection": "Her current research subject involves a cold case related to a hiker who disappeared on land owned by Silas Thorne (Character 4)."
+        },
+        {
+            "Name": "Sebastian Reed",
+            "Role": "The Anonymous Consultant",
+            "Reason": "He is meeting a contact to exchange highly sensitive encrypted files concerning a pharmaceutical company's illegal trials. He is paranoid and constantly looking over his shoulder.",
+            "Connection": "He is the subject of Marcus Chen's (Character 2) investigative book and is terrified that his former associate, Octavia Sterling (Character 10), is trying to locate him."
+        },
+        {
+            "Name": "Octavia Sterling",
+            "Role": "The Undercover Analyst",
+            "Reason": "She claims to be a landscape architect scouting locations, but she is actually working for a shadowy corporate firm. Her real mission is to locate and neutralize Sebastian Reed (Character 9) and retrieve the stolen files.",
+            "Connection": "She is the former business associate of Silas Thorne (Character 4) and is actively hunting Sebastian Reed (Character 9)."
+        }
+    ]
+}
