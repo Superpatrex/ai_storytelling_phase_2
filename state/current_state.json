@@ -73,105 +73,92 @@
             "Connection": "She is the former business associate of Silas Thorne (Character 4) and is actively hunting Sebastian Reed (Character 9)."
         }
     ],
+    "setting": {
+        "location": "Peak Vista Lodge an Exclusive Ski Resort in Colorado - Snowed in due to Blizzard - No phone signal",
+        "time": "Modern Day"
+    },
     "hidden_truth": {
-        "culprit_name": "Dr. Evelyn Shaw",
-        "motive": "Victor Sterling was about to expose Dr. Shaw's fraudulent research in genetic engineering, which formed the foundation of her career and current funding. He possessed a rare, ancient text that contained a specific biological formula, strikingly similar to one Dr. Shaw claimed as original, proving her plagiarism and scientific misconduct.",
-        "method": "Dr. Evelyn Shaw administered a slow-acting, highly potent plant-derived neurotoxin, disguised as a digestive aid, into Victor Sterling's evening tea. The toxin was designed to mimic the symptoms of a severe cardiac event or stroke, making his death appear natural, especially given his advanced age and the isolated, high-stress environment of the blizzard.",
-        "hidden_truth_summary": "Dr. Evelyn Shaw murdered Victor Sterling by poisoning him with a specialized neurotoxin. Sterling was on the verge of exposing Shaw's long-held secret: her acclaimed genetic research was plagiarized from an ancient text he had recently acquired. Shaw acted to protect her reputation and career, ensuring his death appeared to be from natural causes.",
+        "culprit_name": "Silas Thorne",
+        "motive": "Professional jealousy and a desire to steal Professor Holt's latest cryptographic breakthrough, making it appear as a flaw in Holt's system.",
+        "method": "Covertly installed a sophisticated malware, a 'digital ghost', on Professor Holt's research laptop, designed to corrupt specific data files and then self-delete, leaving minimal trace. He exploited a brief moment when Holt left his laptop unattended in the lodge's main lounge.",
+        "hidden_truth_summary": "Silas Thorne, driven by professional envy, sabotaged Professor Adrian Holt's groundbreaking cryptographic research by installing a sophisticated, self-deleting malware on Holt's laptop. His goal was to discredit Holt and appropriate his work, making the sabotage appear as an inherent system failure.",
         "suspects": [
             {
-                "name": "Dr. Evelyn Shaw",
-                "apparent_motive": "Professional rivalry with Victor Sterling over a historical artifact or academic funding for a joint project gone sour.",
-                "alibi": "Claimed to be in her room, preparing for an upcoming medical conference presentation, and retired early due to a migraine.",
+                "name": "Silas Thorne",
+                "apparent_motive": "A long-standing professional rival of Professor Holt, always vying for recognition and competitive advantage in the field of cryptography.",
+                "alibi": "Claims he was in his private suite working on a complex algorithm and later went for a solo ski run on the resort's private slopes.",
                 "is_alibi_false": true
             },
             {
-                "name": "Octavia Sterling",
-                "apparent_motive": "Victor Sterling's niece, stood to inherit a significant portion of his estate, and had a strained relationship with him over family finances and his reclusive lifestyle.",
-                "alibi": "States she was at the lodge's private spa facility, followed by a solitary dinner in her suite, and then went to bed early.",
-                "is_alibi_false": false
+                "name": "Dr. Evelyn Shaw",
+                "apparent_motive": "Known for her cutthroat academic ambition and desire for funding, she might view Holt's success as a direct threat to her own research and career trajectory.",
+                "alibi": "States she was attending a private, scheduled yoga session in the lodge's wellness center during the time of the incident.",
+                "is_alibi_false": true
             },
             {
-                "name": "Silas Thorne",
-                "apparent_motive": "A rival historian and collector who had a public feud with Victor Sterling over the authenticity and ownership of several rare documents, including the one Sterling recently acquired.",
-                "alibi": "Claims he was in the main lounge, engrossed in a chess game with Marcus 'Mac' Chen for several hours, then returned to his room.",
+                "name": "Elara Vance",
+                "apparent_motive": "A tech journalist who was recently denied an exclusive interview with Professor Holt regarding his latest work; she might seek to create a scandal or force his hand for a story.",
+                "alibi": "Maintains she was in the main lounge conducting interviews with other guests for a feature on the resort's winter season.",
                 "is_alibi_false": true
             },
             {
                 "name": "Marcus 'Mac' Chen",
-                "apparent_motive": "The lodge manager. Victor Sterling was known for being a demanding and critical guest, threatening to report several 'minor' infractions that could jeopardize Mac's job or the lodge's reputation.",
-                "alibi": "States he was overseeing blizzard preparations, then played chess with Silas Thorne, and concluded his evening with security rounds of the entire lodge.",
-                "is_alibi_false": true
+                "apparent_motive": "A disgruntled former colleague of Professor Holt, who was fired from a joint research project after a significant failure that Holt blamed on him.",
+                "alibi": "Claims he was assisting the lodge's maintenance staff with a minor electrical issue in the kitchen area.",
+                "is_alibi_false": false
             },
             {
-                "name": "Jasmine Khan",
-                "apparent_motive": "A journalist attempting to write an unauthorized biography of Victor Sterling. She was reportedly frustrated by his refusal to cooperate and rumored to have been threatened with legal action for previous speculative articles.",
-                "alibi": "Claims she was conducting an interview with Leo Bellwether in the dining area, then retired to her room to transcribe notes until late.",
+                "name": "Willow Holt",
+                "apparent_motive": "Professor Holt's estranged sister, rumored to have a complex relationship with him, possibly seeking attention or involved in a family dispute over an inheritance.",
+                "alibi": "States she was quietly reading in the lodge's library and did not leave the area for the duration of the incident.",
                 "is_alibi_false": false
             }
         ],
         "locations": [
             "Peak Vista Lodge (General)",
-            "Victor Sterling's Private Suite",
-            "The Lodge Library/Study",
-            "The Main Lounge and Bar Area",
-            "Dr. Evelyn Shaw's Room"
+            "Professor Holt's Private Suite",
+            "Lodge Main Lounge",
+            "The Wellness Center (Yoga Studio)",
+            "The Lodge Library",
+            "The Kitchen",
+            "Silas Thorne's Private Suite"
         ]
     },
-    "goal": "Prove Victor Sterling was murdered by Dr. Evelyn Shaw and expose her academic fraud",
-    "loop_step": 13,
+    "goal": "Uncover undeniable evidence of external, intentional sabotage on his cryptographic research",
+    "dire_fate": "Professor Holt will be permanently discredited, his groundbreaking research will be stolen and attributed to another, and his academic career will be irrevocably destroyed.",
+    "loop_step": 8,
     "actions_taken": [
         {
-            "action": "Investigate The Lodge Library/Study for any of Victor Sterling's personal research materials or documents.",
-            "outcome": "Problem: The library appears mostly undisturbed, but a single, ancient-looking bookmark is found wedged deep within a seemingly unrelated modern medical journal, not a history book. There's also a faint, unusual chemical smell near the area where the journal was found. | Discovered: An ancient bookmark is found in a modern medical journal. A faint, unusual chemical smell is detected in the library near this discovery. | Was Red Herring: False"
+            "action": "The Detective interviews lodge security personnel and reviews the digital access logs for Professor Holt's suite and general resort activity during the critical timeframe.",
+            "outcome": "Problem: The security team reports a brief, inexplicable 'glitch' in the digital access log system for Holt's specific suite, resulting in a short period of unrecorded activity around the time of the incident. Separately, a maintenance report notes a minor, quickly resolved electrical surge in the kitchen area during the same window, attributed to a faulty appliance. | Discovered: A suspicious, unexplained gap in Professor Holt's suite access logs during the incident timeframe; a minor electrical surge reported in the kitchen at the same time. | Was Red Herring: False"
         },
         {
-            "action": "Consult a medical expert (remotely, given the blizzard) to analyze the specific articles within the medical journal found in the library, particularly those on neurotoxins.",
-            "outcome": "Problem: The expert identifies an article detailing a rare, highly potent neurotoxin that mimics natural causes, but notes the specific dosage and administration methods are oddly highlighted or underlined in what appears to be a different handwriting. | Discovered: A rare neurotoxin that mimics natural causes is identified in the journal, with specific details on its use highlighted by an unknown hand. | Was Red Herring: False"
+            "action": "The Detective reviews all available security camera footage from the main hallways, stairwells, and service entrances of the lodge, covering the period just before, during, and after the access log 'glitch' to track movements near Professor Holt's suite and the IT server room.",
+            "outcome": "Problem: The footage from the hallway leading to Holt's suite shows a brief, unidentifiable electromagnetic interference causing a static burst on the cameras at the exact moment the access logs went dark. Prior to this, a figure wearing a resort maintenance jacket, with their face obscured by a cap, is seen briefly entering a utility closet near the IT server room. The figure quickly exits moments before the camera interference. | Discovered: Evidence of localized electromagnetic interference affecting security cameras near Holt's suite, and a figure in a maintenance jacket seen near the IT server room just before the interference. | Was Red Herring: False"
         },
         {
-            "action": "Discreetly approach the lodge's cleaning staff to inquire about any unusual observations in Dr. Evelyn Shaw's room or any strange items she requested.",
-            "outcome": "Problem: The head of housekeeping reports that Dr. Shaw specifically requested an extra deep clean of her room the day after Sterling's death, emphasizing the removal of any 'lingering odors' and insisting on supervising the disposal of a specific, sealed waste bag herself, which she claimed contained sensitive medical research materials. | Discovered: Dr. Shaw requested an unusual deep clean of her room and personally supervised the disposal of a sealed waste bag containing 'sensitive medical research materials'. | Was Red Herring: False"
+            "action": "The Detective consults with Professor Holt himself, presenting the evidence of localized electromagnetic interference and the access log 'glitch', asking for his expert opinion on how such an attack could be executed and what its purpose might be in relation to his research.",
+            "outcome": "Problem: Professor Holt is visibly shaken by the evidence. He explains that such sophisticated, localized EMI could be used to temporarily disable specific digital security measures or even to mask a rapid, targeted data injection or extraction. He reveals that a rival in his field, known for his eccentric and highly specialized knowledge of electromagnetic cryptography, once theorized about such a 'ghost attack' method, though it was considered purely theoretical and extremely difficult to achieve. | Discovered: Professor Holt explains the purpose of the EMI (disabling security, masking data transfer) and mentions a specific type of rival (fitting Silas Thorne's profile) who theorized such an advanced 'ghost attack' method. | Was Red Herring: False"
         },
         {
-            "action": "Investigate Dr. Evelyn Shaw's academic background and past research for any unusual interests or collaborations, especially concerning ancient texts or historical methodologies, given the ancient bookmark found.",
-            "outcome": "Problem: Dr. Shaw's published academic record is exclusively focused on cutting-edge genetic research. However, a deep dive into an obscure, early paper reveals a footnote referencing a highly specific, ancient methodological practice that seems out of place for her field, citing a rare historical text known to be part of Victor Sterling's collection. | Discovered: While her public profile is modern, an obscure reference in her past work to an ancient text, relevant to Sterling's research, suggests a hidden academic connection or interest. | Was Red Herring: False"
+            "action": "The Detective discreetly investigates Silas Thorne's past publications, research interests, and any known associates within the academic community, specifically looking for any references or discussions of advanced electromagnetic interference techniques or 'ghost attack' methodologies.",
+            "outcome": "Problem: The Detective uncovers a highly obscure, co-authored academic paper from several years ago, where Silas Thorne, along with a lesser-known researcher, briefly outlined a theoretical framework for 'localized, transient electromagnetic pulse generation for secure data transfer disruption' - a concept eerily similar to Holt's 'ghost attack' description. The paper was largely dismissed by the mainstream but shows Thorne's specific interest. | Discovered: Silas Thorne co-authored an obscure paper detailing a theoretical framework for localized EMPs to disrupt data transfer, strongly linking him to the 'ghost attack' concept and the technical knowledge required for the sabotage. | Was Red Herring: False"
         },
         {
-            "action": "Conduct a more thorough search of Victor Sterling's Private Suite, specifically looking for any personal journals, research notes, or correspondence that might contain handwriting samples or references to the ancient text and Dr. Shaw.",
-            "outcome": "Problem: Sterling's suite is meticulously organized, but a hidden compartment in his desk contains a heavily redacted research diary. While no direct handwriting samples are found, one entry cryptically mentions a 'betrayal' regarding 'shared knowledge' and a 'serpentine secret' just days before his death. | Discovered: A redacted research diary belonging to Sterling mentions a 'betrayal' and 'serpentine secret' related to 'shared knowledge' just before his death. | Was Red Herring: False"
+            "action": "The Detective arranges for a discreet, 'scheduled fire alarm inspection' of Silas Thorne's private suite, using the opportunity to look for any hidden electronic devices or components related to electromagnetic interference.",
+            "outcome": "Problem: During the 'inspection', a hidden compartment is discovered in Thorne's desk, containing a small, custom-built device with advanced circuitry. Before it can be fully examined, the device emits a brief, high-frequency pulse and then self-destructs, leaving only charred remnants. However, the Detective notes a distinct, acrid smell similar to burnt ozone that lingers. | Discovered: A custom-built, self-destructing electronic device, capable of emitting a high-frequency pulse and leaving an ozone-like smell (consistent with an EMP), was found hidden in Silas Thorne's suite. This strongly suggests Thorne's direct involvement and the method of sabotage. | Was Red Herring: False"
         },
         {
-            "action": "Re-examine the ancient bookmark found in the medical journal, looking for any hidden symbols, inscriptions, or material properties that might connect it more directly to Dr. Shaw or Sterling's 'serpentine secret'.",
-            "outcome": "Problem: Under specialized light, the bookmark reveals a nearly invisible, intricate symbol of a coiled serpent entwined around an ancient scroll, a known emblem of a clandestine academic society focused on esoteric knowledge. Further investigation reveals Dr. Evelyn Shaw is a high-ranking, but secretly affiliated, member of this very society, which is rumored to possess knowledge of ancient biological agents. | Discovered: The bookmark is the emblem of a secret academic society to which Dr. Shaw secretly belongs, a society known for its interest in ancient biological agents and esoteric knowledge, linking her directly to the 'serpentine secret'. | Was Red Herring: False"
+            "action": "The Detective brings the charred remnants of the self-destructed device from Silas Thorne's suite to a specialized forensic lab for detailed analysis, hoping to uncover any residual data or unique material signatures.",
+            "outcome": "Problem: The forensic team confirms the device was designed for complete data erasure. However, they identify a peculiar, microscopic residue of a synthetic polymer embedded within the charred remains. This polymer is not standard in commercial electronics but is known to be used in experimental, high-frequency signal dampening materials, suggesting the device was specifically engineered to operate without detection. | Discovered: Microscopic residue of a synthetic polymer, used in experimental high-frequency signal dampening, found on the device remnants, indicating sophisticated, stealthy engineering. | Was Red Herring: False"
         },
         {
-            "action": "Investigate the history and known activities of the clandestine academic society (whose emblem was on the bookmark), particularly any public records or rumors linking its members to unusual research or historical artifacts that Victor Sterling might have possessed.",
-            "outcome": "Problem: Further research into the society reveals a recent, highly controversial incident involving a former member who attempted to expose the society's unethical practices regarding 'ancient biological samples'. This former member subsequently vanished, and their research was officially discredited, suggesting the society's ruthlessness. | Discovered: The secret academic society has a history of silencing members who threaten to expose their unethical research, specifically involving 'ancient biological samples', indicating a dangerous level of secrecy and power. | Was Red Herring: False"
+            "action": "The Detective subtly re-interviews Silas Thorne, asking him to elaborate on the 'complex algorithm' he was working on and the exact route and conditions of his 'solo ski run', focusing on details that could be independently verified or reveal inconsistencies.",
+            "outcome": "Problem: Thorne remains composed, providing a technically sophisticated (though vague) explanation of his algorithm and a detailed description of his ski route, weather conditions, and even a specific scenic landmark he passed. He offers to show the Detective the coordinates on a map. However, the Detective notices that Thorne's left ski boot has a faint, unusual scuff mark on its inner side, inconsistent with typical wear from a 'solo ski run' on resort slopes, and more akin to navigating tight, enclosed spaces. | Discovered: Thorne's alibi is robust, but a subtle physical detail (scuff mark on ski boot) raises new suspicion about his actual movements or activities. | Was Red Herring: False"
         },
         {
-            "action": "Cross-reference the highlighted sections in the medical journal (detailing the neurotoxin) with Dr. Evelyn Shaw's known research interests and published works to see if there's any overlap in specific chemical structures or biological mechanisms.",
-            "outcome": "Problem: While Shaw's research is primarily genetic, a minor collaborative paper from years ago, almost overlooked, details a study on receptor binding sites in the nervous system, which, when re-read with the neurotoxin in mind, describes the exact neural pathway targeted by the rare neurotoxin. The paper also vaguely mentions 'novel methods of delivery'. | Discovered: An old, obscure paper by Shaw reveals her expertise in the precise neural pathway targeted by the identified neurotoxin, and hints at 'novel methods of delivery'. | Was Red Herring: False"
-        },
-        {
-            "action": "Investigate the records of the clandestine academic society (whose emblem was on the bookmark) for any publications, research grants, or internal documents that might reveal Dr. Shaw's specific contributions related to \"ancient biological samples\" or texts.",
-            "outcome": "Problem: Accessing internal society records is nearly impossible due to their secrecy. However, an anonymous online leak from a disgruntled former member mentions a \"project codenamed 'Serpent's Kiss'\" which involved extracting a highly potent compound from an ancient plant specimen, but the leak was quickly suppressed and dismissed as a hoax. | Discovered: An anonymous, suppressed leak from the secret society mentions a project \"Serpent's Kiss\" involving a potent compound from an ancient plant, aligning with the neurotoxin and Sterling's 'serpentine secret'. | Was Red Herring: False"
-        },
-        {
-            "action": "Conduct a covert, extremely thorough search of Dr. Evelyn Shaw's room, specifically targeting any unusual plant matter, residues, or hidden components that could relate to the 'Serpent's Kiss' project or the neurotoxin's preparation.",
-            "outcome": "Problem: The room appears meticulously clean, but a faint, almost imperceptible residue is discovered in a hidden vent. Analysis reveals it to be a highly unusual, rare pollen not native to the region, consistent with the description of an ancient plant specimen. | Discovered: Discovery of rare, non-native pollen in Shaw's room directly links her to the 'ancient plant specimen' from the 'Serpent's Kiss' project, providing a strong physical clue to the neurotoxin's origin. | Was Red Herring: False"
-        },
-        {
-            "action": "Review security footage and guest logs from the lodge, focusing on the day Sterling died and the preceding 24 hours, specifically looking for any interactions between Dr. Shaw and Sterling, or any unusual access Shaw had to areas where Sterling's food or drink might have been prepared.",
-            "outcome": "Problem: The lodge's old security system has significant blind spots, and key footage from the main dining area and kitchen prep zones from the critical time has been 'corrupted' or 'overwritten' due to a reported 'blizzard-related power surge' that Mac Chen claims affected the old servers. | Discovered: The convenient disappearance of critical security footage points to deliberate sabotage, suggesting Dr. Evelyn Shaw or an accomplice is actively trying to cover tracks, escalating the danger. | Was Red Herring: False"
-        },
-        {
-            "action": "Conduct a focused search within Victor Sterling's private collection for the specific rare historical text referenced in Dr. Shaw's early paper and linked to the secret society.",
-            "outcome": "Problem: The specific ancient text is missing from Sterling's meticulously organized collection. A fresh indentation on the shelf indicates its recent removal, and a cryptic note, not in Sterling's hand, is found behind its former position, simply stating: 'They're onto us. The original is gone.' | Discovered: The crucial ancient text has been stolen, confirming active interference in the investigation and suggesting Dr. Shaw or an accomplice is aware of The Detective's progress. The cryptic note implies a broader conspiracy or an accomplice. | Was Red Herring: False"
-        },
-        {
-            "action": "Confront Dr. Evelyn Shaw with the combined evidence: the rare pollen in her room, the detailed neurotoxin article with highlighted sections matching her obscure research, and the stolen ancient text, demanding she explain her involvement in Victor Sterling's death and the academic fraud.",
-            "outcome": "Goal Achieved! Resolution: Faced with irrefutable evidence, Dr. Shaw's composed facade shatters. She confesses in a fit of rage and desperation, admitting she poisoned Sterling with the neurotoxin derived from the ancient plant to prevent him from exposing her long-held academic fraud, which involved plagiarizing her acclaimed genetic research from the very text he possessed. She screams that he was going to ruin her, and she had no choice but to silence him, confirming both the murder and the fraud. The lodge staff, alerted by the commotion, apprehend her. | Discovered: Dr. Shaw's full confession, detailing the murder, the specific neurotoxin, and the academic fraud stemming from plagiarism of the ancient text."
+            "action": "The Detective arranges for Professor Holt's laptop to undergo an unprecedented level of forensic analysis by a top-tier cybersecurity firm specializing in advanced persistent threats and stealthy malware, specifically looking for unique digital signatures or residual traces of the self-deleting malware.",
+            "outcome": "Goal Achieved! Resolution: The specialized forensic team, after days of meticulous work, identifies a highly unusual, almost imperceptible digital signature embedded deep within the laptop's system logs, indicating a rapid, targeted data injection that self-erased immediately after execution. They confirm it's not an internal system failure but a unique, custom-designed piece of malware, leaving a faint, specific 'ghost' trace that points to an external, highly skilled attacker. They also find a timestamp that perfectly aligns with the access log glitch and EMI burst, providing irrefutable proof of external intervention. | Discovered: Specialized forensic analysis confirms a unique, custom-designed, self-erasing malware signature and its timestamp perfectly matching the incident, providing undeniable evidence of external, intentional sabotage."
         }
     ],
     "current_action": null,
@@ -179,159 +166,1907 @@
     "story_elements": [
         {
             "type": "action",
-            "description": "Investigate The Lodge Library/Study for any of Victor Sterling's personal research materials or documents.",
-            "reasoning": "To understand what Sterling was working on, which might reveal a motive for murder or a connection to a suspect's expertise."
+            "description": "The Detective interviews lodge security personnel and reviews the digital access logs for Professor Holt's suite and general resort activity during the critical timeframe.",
+            "reasoning": "External sabotage would likely involve unauthorized access or manipulation of resort systems. Security logs and staff observations could reveal crucial discrepancies."
         },
         {
             "type": "obstacle",
-            "description": "The library appears mostly undisturbed, but a single, ancient-looking bookmark is found wedged deep within a seemingly unrelated modern medical journal, not a history book. There's also a faint, unusual chemical smell near the area where the journal was found.",
+            "description": "The security team reports a brief, inexplicable 'glitch' in the digital access log system for Holt's specific suite, resulting in a short period of unrecorded activity around the time of the incident. Separately, a maintenance report notes a minor, quickly resolved electrical surge in the kitchen area during the same window, attributed to a faulty appliance.",
             "is_red_herring": false,
-            "new_info": "An ancient bookmark is found in a modern medical journal. A faint, unusual chemical smell is detected in the library near this discovery."
+            "new_info": "A suspicious, unexplained gap in Professor Holt's suite access logs during the incident timeframe; a minor electrical surge reported in the kitchen at the same time."
         },
         {
             "type": "action",
-            "description": "Consult a medical expert (remotely, given the blizzard) to analyze the specific articles within the medical journal found in the library, particularly those on neurotoxins.",
-            "reasoning": "To understand if the journal's content, especially articles on neurotoxins, could provide insight into Victor Sterling's cause of death or potential methods used by a medical professional."
+            "description": "The Detective reviews all available security camera footage from the main hallways, stairwells, and service entrances of the lodge, covering the period just before, during, and after the access log 'glitch' to track movements near Professor Holt's suite and the IT server room.",
+            "reasoning": "Despite the 'glitch' in Holt's suite logs, someone had to physically access the area or manipulate systems. General surveillance might reveal suspicious movements or individuals who could have bypassed or tampered with the security infrastructure."
         },
         {
             "type": "obstacle",
-            "description": "The expert identifies an article detailing a rare, highly potent neurotoxin that mimics natural causes, but notes the specific dosage and administration methods are oddly highlighted or underlined in what appears to be a different handwriting.",
+            "description": "The footage from the hallway leading to Holt's suite shows a brief, unidentifiable electromagnetic interference causing a static burst on the cameras at the exact moment the access logs went dark. Prior to this, a figure wearing a resort maintenance jacket, with their face obscured by a cap, is seen briefly entering a utility closet near the IT server room. The figure quickly exits moments before the camera interference.",
             "is_red_herring": false,
-            "new_info": "A rare neurotoxin that mimics natural causes is identified in the journal, with specific details on its use highlighted by an unknown hand."
+            "new_info": "Evidence of localized electromagnetic interference affecting security cameras near Holt's suite, and a figure in a maintenance jacket seen near the IT server room just before the interference."
         },
         {
             "type": "action",
-            "description": "Discreetly approach the lodge's cleaning staff to inquire about any unusual observations in Dr. Evelyn Shaw's room or any strange items she requested.",
-            "reasoning": "The chemical smell and the medical journal pointing to a neurotoxin, combined with Dr. Shaw's medical expertise, make her room a prime location for evidence. Cleaning staff might have noticed something a direct search would miss."
+            "description": "The Detective consults with Professor Holt himself, presenting the evidence of localized electromagnetic interference and the access log 'glitch', asking for his expert opinion on how such an attack could be executed and what its purpose might be in relation to his research.",
+            "reasoning": "Leveraging the victim's deep technical expertise to understand the sophistication and intent behind the observed sabotage methods, potentially gaining insight into the perpetrator's knowledge."
         },
         {
             "type": "obstacle",
-            "description": "The head of housekeeping reports that Dr. Shaw specifically requested an extra deep clean of her room the day after Sterling's death, emphasizing the removal of any 'lingering odors' and insisting on supervising the disposal of a specific, sealed waste bag herself, which she claimed contained sensitive medical research materials.",
+            "description": "Professor Holt is visibly shaken by the evidence. He explains that such sophisticated, localized EMI could be used to temporarily disable specific digital security measures or even to mask a rapid, targeted data injection or extraction. He reveals that a rival in his field, known for his eccentric and highly specialized knowledge of electromagnetic cryptography, once theorized about such a 'ghost attack' method, though it was considered purely theoretical and extremely difficult to achieve.",
             "is_red_herring": false,
-            "new_info": "Dr. Shaw requested an unusual deep clean of her room and personally supervised the disposal of a sealed waste bag containing 'sensitive medical research materials'."
+            "new_info": "Professor Holt explains the purpose of the EMI (disabling security, masking data transfer) and mentions a specific type of rival (fitting Silas Thorne's profile) who theorized such an advanced 'ghost attack' method."
         },
         {
             "type": "action",
-            "description": "Investigate Dr. Evelyn Shaw's academic background and past research for any unusual interests or collaborations, especially concerning ancient texts or historical methodologies, given the ancient bookmark found.",
-            "reasoning": "The presence of an ancient bookmark in a modern medical journal is highly incongruous. If Dr. Shaw has a hidden interest in ancient texts, it could connect her to Victor Sterling's area of expertise and provide a deeper motive."
+            "description": "The Detective discreetly investigates Silas Thorne's past publications, research interests, and any known associates within the academic community, specifically looking for any references or discussions of advanced electromagnetic interference techniques or 'ghost attack' methodologies.",
+            "reasoning": "Professor Holt mentioned a rival who theorized 'ghost attack' methods, and Silas Thorne fits the profile of a prominent rival. Investigating his academic history might reveal his expertise or interest in such an attack."
         },
         {
             "type": "obstacle",
-            "description": "Dr. Shaw's published academic record is exclusively focused on cutting-edge genetic research. However, a deep dive into an obscure, early paper reveals a footnote referencing a highly specific, ancient methodological practice that seems out of place for her field, citing a rare historical text known to be part of Victor Sterling's collection.",
+            "description": "The Detective uncovers a highly obscure, co-authored academic paper from several years ago, where Silas Thorne, along with a lesser-known researcher, briefly outlined a theoretical framework for 'localized, transient electromagnetic pulse generation for secure data transfer disruption' - a concept eerily similar to Holt's 'ghost attack' description. The paper was largely dismissed by the mainstream but shows Thorne's specific interest.",
             "is_red_herring": false,
-            "new_info": "While her public profile is modern, an obscure reference in her past work to an ancient text, relevant to Sterling's research, suggests a hidden academic connection or interest."
+            "new_info": "Silas Thorne co-authored an obscure paper detailing a theoretical framework for localized EMPs to disrupt data transfer, strongly linking him to the 'ghost attack' concept and the technical knowledge required for the sabotage."
         },
         {
             "type": "action",
-            "description": "Conduct a more thorough search of Victor Sterling's Private Suite, specifically looking for any personal journals, research notes, or correspondence that might contain handwriting samples or references to the ancient text and Dr. Shaw.",
-            "reasoning": "The 'different handwriting' in the medical journal and Shaw's obscure reference to an ancient text suggest a hidden connection. Sterling's personal effects might hold the key to identifying the handwriting or clarifying the link."
+            "description": "The Detective arranges for a discreet, 'scheduled fire alarm inspection' of Silas Thorne's private suite, using the opportunity to look for any hidden electronic devices or components related to electromagnetic interference.",
+            "reasoning": "Given Thorne's specific research on localized EMPs and Professor Holt's 'ghost attack' theory, his suite is a critical location to find direct evidence of the sabotage device or its components. A covert search is necessary to avoid alerting him."
         },
         {
             "type": "obstacle",
-            "description": "Sterling's suite is meticulously organized, but a hidden compartment in his desk contains a heavily redacted research diary. While no direct handwriting samples are found, one entry cryptically mentions a 'betrayal' regarding 'shared knowledge' and a 'serpentine secret' just days before his death.",
+            "description": "During the 'inspection', a hidden compartment is discovered in Thorne's desk, containing a small, custom-built device with advanced circuitry. Before it can be fully examined, the device emits a brief, high-frequency pulse and then self-destructs, leaving only charred remnants. However, the Detective notes a distinct, acrid smell similar to burnt ozone that lingers.",
             "is_red_herring": false,
-            "new_info": "A redacted research diary belonging to Sterling mentions a 'betrayal' and 'serpentine secret' related to 'shared knowledge' just before his death."
+            "new_info": "A custom-built, self-destructing electronic device, capable of emitting a high-frequency pulse and leaving an ozone-like smell (consistent with an EMP), was found hidden in Silas Thorne's suite. This strongly suggests Thorne's direct involvement and the method of sabotage."
         },
         {
             "type": "action",
-            "description": "Re-examine the ancient bookmark found in the medical journal, looking for any hidden symbols, inscriptions, or material properties that might connect it more directly to Dr. Shaw or Sterling's 'serpentine secret'.",
-            "reasoning": "The bookmark's placement in a modern medical journal and the chemical smell suggest it's more than just a historical artifact. Sterling's diary mentioned a 'serpentine secret' which could be linked to an organization or a specific type of knowledge."
+            "description": "The Detective brings the charred remnants of the self-destructed device from Silas Thorne's suite to a specialized forensic lab for detailed analysis, hoping to uncover any residual data or unique material signatures.",
+            "reasoning": "The device's self-destruction suggests an attempt to destroy evidence. Analyzing the fragments might reveal its true purpose, its connection to the sabotage, or unique components that could link it to Thorne's specific research interests."
         },
         {
             "type": "obstacle",
-            "description": "Under specialized light, the bookmark reveals a nearly invisible, intricate symbol of a coiled serpent entwined around an ancient scroll, a known emblem of a clandestine academic society focused on esoteric knowledge. Further investigation reveals Dr. Evelyn Shaw is a high-ranking, but secretly affiliated, member of this very society, which is rumored to possess knowledge of ancient biological agents.",
+            "description": "The forensic team confirms the device was designed for complete data erasure. However, they identify a peculiar, microscopic residue of a synthetic polymer embedded within the charred remains. This polymer is not standard in commercial electronics but is known to be used in experimental, high-frequency signal dampening materials, suggesting the device was specifically engineered to operate without detection.",
             "is_red_herring": false,
-            "new_info": "The bookmark is the emblem of a secret academic society to which Dr. Shaw secretly belongs, a society known for its interest in ancient biological agents and esoteric knowledge, linking her directly to the 'serpentine secret'."
+            "new_info": "Microscopic residue of a synthetic polymer, used in experimental high-frequency signal dampening, found on the device remnants, indicating sophisticated, stealthy engineering."
         },
         {
             "type": "action",
-            "description": "Investigate the history and known activities of the clandestine academic society (whose emblem was on the bookmark), particularly any public records or rumors linking its members to unusual research or historical artifacts that Victor Sterling might have possessed.",
-            "reasoning": "Understanding the society's objectives and past actions might reveal Dr. Shaw's full motive or how she gained access to the specialized neurotoxin."
+            "description": "The Detective subtly re-interviews Silas Thorne, asking him to elaborate on the 'complex algorithm' he was working on and the exact route and conditions of his 'solo ski run', focusing on details that could be independently verified or reveal inconsistencies.",
+            "reasoning": "Given the self-destructing device found in his suite, Thorne's alibi is critical. Pushing for more details might expose a weakness or a lie."
         },
         {
             "type": "obstacle",
-            "description": "Further research into the society reveals a recent, highly controversial incident involving a former member who attempted to expose the society's unethical practices regarding 'ancient biological samples'. This former member subsequently vanished, and their research was officially discredited, suggesting the society's ruthlessness.",
+            "description": "Thorne remains composed, providing a technically sophisticated (though vague) explanation of his algorithm and a detailed description of his ski route, weather conditions, and even a specific scenic landmark he passed. He offers to show the Detective the coordinates on a map. However, the Detective notices that Thorne's left ski boot has a faint, unusual scuff mark on its inner side, inconsistent with typical wear from a 'solo ski run' on resort slopes, and more akin to navigating tight, enclosed spaces.",
             "is_red_herring": false,
-            "new_info": "The secret academic society has a history of silencing members who threaten to expose their unethical research, specifically involving 'ancient biological samples', indicating a dangerous level of secrecy and power."
+            "new_info": "Thorne's alibi is robust, but a subtle physical detail (scuff mark on ski boot) raises new suspicion about his actual movements or activities."
         },
         {
             "type": "action",
-            "description": "Cross-reference the highlighted sections in the medical journal (detailing the neurotoxin) with Dr. Evelyn Shaw's known research interests and published works to see if there's any overlap in specific chemical structures or biological mechanisms.",
-            "reasoning": "If she's familiar with this specific neurotoxin, her academic work might show a subtle connection, even if not directly on toxins."
-        },
-        {
-            "type": "obstacle",
-            "description": "While Shaw's research is primarily genetic, a minor collaborative paper from years ago, almost overlooked, details a study on receptor binding sites in the nervous system, which, when re-read with the neurotoxin in mind, describes the exact neural pathway targeted by the rare neurotoxin. The paper also vaguely mentions 'novel methods of delivery'.",
-            "is_red_herring": false,
-            "new_info": "An old, obscure paper by Shaw reveals her expertise in the precise neural pathway targeted by the identified neurotoxin, and hints at 'novel methods of delivery'."
-        },
-        {
-            "type": "action",
-            "description": "Investigate the records of the clandestine academic society (whose emblem was on the bookmark) for any publications, research grants, or internal documents that might reveal Dr. Shaw's specific contributions related to \"ancient biological samples\" or texts.",
-            "reasoning": "Since Shaw is a high-ranking, secret member, and the society is known for ancient biological samples, their internal records might directly link her to the source material Sterling possessed or reveal unethical research methods relevant to the neurotoxin."
-        },
-        {
-            "type": "obstacle",
-            "description": "Accessing internal society records is nearly impossible due to their secrecy. However, an anonymous online leak from a disgruntled former member mentions a \"project codenamed 'Serpent's Kiss'\" which involved extracting a highly potent compound from an ancient plant specimen, but the leak was quickly suppressed and dismissed as a hoax.",
-            "is_red_herring": false,
-            "new_info": "An anonymous, suppressed leak from the secret society mentions a project \"Serpent's Kiss\" involving a potent compound from an ancient plant, aligning with the neurotoxin and Sterling's 'serpentine secret'."
-        },
-        {
-            "type": "action",
-            "description": "Conduct a covert, extremely thorough search of Dr. Evelyn Shaw's room, specifically targeting any unusual plant matter, residues, or hidden components that could relate to the 'Serpent's Kiss' project or the neurotoxin's preparation.",
-            "reasoning": "Given her earlier deep clean request and the anonymous leak mentioning an 'ancient plant specimen' in the 'Serpent's Kiss' project, there might be overlooked traces or a clandestine setup in her room."
-        },
-        {
-            "type": "obstacle",
-            "description": "The room appears meticulously clean, but a faint, almost imperceptible residue is discovered in a hidden vent. Analysis reveals it to be a highly unusual, rare pollen not native to the region, consistent with the description of an ancient plant specimen.",
-            "is_red_herring": false,
-            "new_info": "Discovery of rare, non-native pollen in Shaw's room directly links her to the 'ancient plant specimen' from the 'Serpent's Kiss' project, providing a strong physical clue to the neurotoxin's origin."
-        },
-        {
-            "type": "action",
-            "description": "Review security footage and guest logs from the lodge, focusing on the day Sterling died and the preceding 24 hours, specifically looking for any interactions between Dr. Shaw and Sterling, or any unusual access Shaw had to areas where Sterling's food or drink might have been prepared.",
-            "reasoning": "The \"novel methods of delivery\" from Shaw's old paper, combined with the neurotoxin, suggests a discreet administration. Security footage might show a critical interaction or opportunity."
-        },
-        {
-            "type": "obstacle",
-            "description": "The lodge's old security system has significant blind spots, and key footage from the main dining area and kitchen prep zones from the critical time has been 'corrupted' or 'overwritten' due to a reported 'blizzard-related power surge' that Mac Chen claims affected the old servers.",
-            "is_red_herring": false,
-            "new_info": "The convenient disappearance of critical security footage points to deliberate sabotage, suggesting Dr. Evelyn Shaw or an accomplice is actively trying to cover tracks, escalating the danger."
-        },
-        {
-            "type": "action",
-            "description": "Conduct a focused search within Victor Sterling's private collection for the specific rare historical text referenced in Dr. Shaw's early paper and linked to the secret society.",
-            "reasoning": "This ancient text is a crucial link between Sterling's research, Shaw's hidden academic interests, and the potential plagiarism motive, and might contain direct evidence of their interaction or Sterling's suspicions."
-        },
-        {
-            "type": "obstacle",
-            "description": "The specific ancient text is missing from Sterling's meticulously organized collection. A fresh indentation on the shelf indicates its recent removal, and a cryptic note, not in Sterling's hand, is found behind its former position, simply stating: 'They're onto us. The original is gone.'",
-            "is_red_herring": false,
-            "new_info": "The crucial ancient text has been stolen, confirming active interference in the investigation and suggesting Dr. Shaw or an accomplice is aware of The Detective's progress. The cryptic note implies a broader conspiracy or an accomplice."
-        },
-        {
-            "type": "action",
-            "description": "Confront Dr. Evelyn Shaw with the combined evidence: the rare pollen in her room, the detailed neurotoxin article with highlighted sections matching her obscure research, and the stolen ancient text, demanding she explain her involvement in Victor Sterling's death and the academic fraud.",
-            "reasoning": "The cumulative weight of the physical evidence (pollen), her specific scientific knowledge (neurotoxin mechanism), and her motive (stolen text, academic fraud) should be enough to break her. This is the culmination of the investigation."
+            "description": "The Detective arranges for Professor Holt's laptop to undergo an unprecedented level of forensic analysis by a top-tier cybersecurity firm specializing in advanced persistent threats and stealthy malware, specifically looking for unique digital signatures or residual traces of the self-deleting malware.",
+            "reasoning": "Given the sophistication of the self-destructing EMP device and the experimental polymer, a deeper forensic dive into the laptop's core systems is necessary to find the 'undeniable evidence' of external, intentional sabotage directly on Holt's research."
         },
         {
             "type": "resolution",
-            "description": "Faced with irrefutable evidence, Dr. Shaw's composed facade shatters. She confesses in a fit of rage and desperation, admitting she poisoned Sterling with the neurotoxin derived from the ancient plant to prevent him from exposing her long-held academic fraud, which involved plagiarizing her acclaimed genetic research from the very text he possessed. She screams that he was going to ruin her, and she had no choice but to silence him, confirming both the murder and the fraud. The lodge staff, alerted by the commotion, apprehend her.",
+            "description": "The specialized forensic team, after days of meticulous work, identifies a highly unusual, almost imperceptible digital signature embedded deep within the laptop's system logs, indicating a rapid, targeted data injection that self-erased immediately after execution. They confirm it's not an internal system failure but a unique, custom-designed piece of malware, leaving a faint, specific 'ghost' trace that points to an external, highly skilled attacker. They also find a timestamp that perfectly aligns with the access log glitch and EMI burst, providing irrefutable proof of external intervention.",
             "is_red_herring": false,
-            "new_info": "Dr. Shaw's full confession, detailing the murder, the specific neurotoxin, and the academic fraud stemming from plagiarism of the ancient text."
+            "new_info": "Specialized forensic analysis confirms a unique, custom-designed, self-erasing malware signature and its timestamp perfectly matching the incident, providing undeniable evidence of external, intentional sabotage."
         }
     ],
-    "setting": {
-        "location": "Peak Vista Lodge an Exclusive Ski Resort in Colorado - Snowed in due to Blizzard - No phone signal",
-        "time": "Modern Day"
-    },
-    "dire_fate": "Dr. Evelyn Shaw will escape justice, her academic fraud will remain hidden, and her reputation will be cemented, while Victor Sterling's death is permanently deemed natural causes.",
-    "fixed_outline": "The Detective begins by investigating Victor Sterling's lodge library, seeking research materials. The search reveals an ancient bookmark lodged in a modern medical journal, accompanied by a faint, unusual chemical smell. Consulting a remote medical expert, The Detective learns the journal contains an article on a rare neurotoxin that mimics natural causes, with specific dosage and administration methods highlighted in an unknown hand. This discovery, combined with the chemical smell and Dr. Evelyn Shaw's medical expertise, prompts The Detective to discreetly question the lodge's cleaning staff. The head of housekeeping reports Dr. Shaw requested an unusual deep clean of her room the day after Sterling's death, personally supervising the disposal of a sealed waste bag, claiming it held 'sensitive medical research materials'. The Detective then investigates Dr. Shaw's academic background, finding an obscure, early paper referencing an ancient text known to be part of Sterling's collection, hinting at a hidden academic connection. A subsequent search of Sterling's private suite uncovers a heavily redacted research diary with an entry cryptically mentioning 'betrayal', 'shared knowledge', and a 'serpentine secret' just before his death. Re-examining the ancient bookmark under specialized light reveals an intricate symbol of a coiled serpent, the emblem of a clandestine academic society. Further investigation confirms Dr. Shaw's secret, high-ranking affiliation with this society, rumored to possess knowledge of ancient biological agents. Research into the society's history reveals a pattern of ruthlessness, including silencing members who threatened to expose 'ancient biological samples'. The Detective cross-references the neurotoxin details with Shaw's work, finding an old, overlooked paper detailing her expertise in the exact neural pathway targeted by the toxin, and vaguely mentioning 'novel methods of delivery'. Further attempts to access the society's internal records are thwarted, but an anonymous online leak from a former member mentions a suppressed 'Serpent's Kiss' project, involving a potent compound from an ancient plant specimen, aligning with the neurotoxin and Sterling's 'serpentine secret'. Armed with this information, The Detective conducts a covert, thorough search of Dr. Shaw's room, discovering a faint, rare, non-native pollen residue in a hidden vent, consistent with the ancient plant specimen. Reviewing lodge security footage for the day of Sterling's death reveals key footage from dining and kitchen areas has been 'corrupted' or 'overwritten' due to a reported 'blizzard-related power surge', strongly suggesting deliberate sabotage. A focused search for the specific ancient text referenced in Shaw's early paper and linked to the society finds it missing from Sterling's collection, with a fresh indentation on the shelf. A cryptic note, not in Sterling's hand, is found behind its former position, stating: 'They're onto us. The original is gone.' Finally, The Detective confronts Dr. Evelyn Shaw with the cumulative evidence: the rare pollen in her room, her specific expertise matching the neurotoxin's mechanism, the suppressed 'Serpent's Kiss' project, the corrupted security footage, and the stolen ancient text. Faced with irrefutable proof, Dr. Shaw's composure shatters, and she confesses in a fit of rage and desperation. She admits to poisoning Sterling with the neurotoxin, derived from the ancient plant, to prevent him from exposing her long-held academic fraud, which involved plagiarizing her acclaimed genetic research from the very ancient text he possessed. She screams that he was going to ruin her, and she had no choice but to silence him, confirming both the murder and the fraud. Lodge staff, alerted by the commotion, apprehend her.",
-    "plot_holes_fixed": [
-        "The 'different handwriting' in the medical journal, initially unidentified, is implicitly linked to Dr. Shaw's expertise in neurotoxins and the 'Serpent's Kiss' project, becoming a cumulative piece of evidence against her without needing a direct handwriting match, as her other research directly aligns with the neurotoxin's mechanism.",
-        "The character 'Mac Chen' was removed as he served no further narrative purpose beyond reporting corrupted footage, preventing an abandoned thread. The corrupted footage now serves as a general indicator of deliberate sabotage.",
-        "The disposal of the sealed waste bag by Dr. Shaw was maintained as a permanent action, ensuring no attempt was made to find it later. Instead, residual evidence (rare, non-native pollen in a hidden vent) was discovered, maintaining physical evidence continuity and demonstrating Shaw's attempt to clean up was not entirely successful.",
-        "The cryptic note about 'They're onto us' and the stolen ancient text implies active interference by Dr. Shaw or an accomplice, heightening suspense and confirming a cover-up without requiring an explicit identification of the note's author for the story's resolution, as the focus remains on Shaw's ultimate guilt and motive."
+    "plot_points": [
+        {
+            "id": "pp_001",
+            "sequence": 1,
+            "description": "The Detective interviews lodge security personnel and reviews digital access logs for Professor Holt's suite and general resort activity during the critical timeframe, seeking discrepancies or unauthorized access.",
+            "type": "event",
+            "is_red_herring": false,
+            "location_hint": "Resort Security Office",
+            "characters_involved": [
+                "Detective",
+                "Security Personnel"
+            ]
+        },
+        {
+            "id": "pp_002",
+            "sequence": 2,
+            "description": "Security reports an inexplicable 'glitch' in Holt's suite access logs, creating a period of unrecorded activity. Simultaneously, a maintenance report notes a minor, quickly resolved electrical surge in the kitchen area, attributed to a faulty appliance.",
+            "type": "obstacle",
+            "is_red_herring": true,
+            "location_hint": "Resort Security Office",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_003",
+            "sequence": 3,
+            "description": "The Detective reviews all available security camera footage from hallways, stairwells, and service entrances, covering the period just before, during, and after the access log 'glitch' to track movements near Holt's suite and the IT server room.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Resort Security Office",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_004",
+            "sequence": 4,
+            "description": "Footage near Holt's suite shows brief electromagnetic interference causing a static burst on cameras at the moment of the log glitch. Prior to this, a figure in a resort maintenance jacket, face obscured, is seen briefly entering and exiting a utility closet near the IT server room.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Resort Hallways and Utility Closet",
+            "characters_involved": [
+                "Detective",
+                "Figure in Maintenance Jacket"
+            ]
+        },
+        {
+            "id": "pp_005",
+            "sequence": 5,
+            "description": "The Detective consults Professor Holt, presenting evidence of the localized electromagnetic interference and access log 'glitch', seeking his expert opinion on the execution and purpose of such an attack.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Professor Holt's Suite",
+            "characters_involved": [
+                "Detective",
+                "Professor Adrian Holt"
+            ]
+        },
+        {
+            "id": "pp_006",
+            "sequence": 6,
+            "description": "Professor Holt explains that sophisticated, localized EMI could disable security or mask data transfer, revealing that a rival, known for expertise in electromagnetic cryptography, once theorized a similar 'ghost attack' method.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Professor Holt's Suite",
+            "characters_involved": [
+                "Professor Adrian Holt"
+            ]
+        },
+        {
+            "id": "pp_007",
+            "sequence": 7,
+            "description": "The Detective discreetly investigates Silas Thorne's past publications and research interests for any references to advanced electromagnetic interference or 'ghost attack' methodologies.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Detective's Office / Academic Databases",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_008",
+            "sequence": 8,
+            "description": "The Detective uncovers an obscure academic paper co-authored by Silas Thorne outlining a theoretical framework for 'localized, transient electromagnetic pulse generation for secure data transfer disruption', strikingly similar to Holt's 'ghost attack' description.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Academic Databases",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_009",
+            "sequence": 9,
+            "description": "The Detective arranges a discreet 'fire alarm inspection' of Silas Thorne's private suite to search for hidden electronic devices or components related to electromagnetic interference.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Silas Thorne's Suite",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_010",
+            "sequence": 10,
+            "description": "During the inspection, a hidden compartment in Thorne's desk reveals a small, custom-built device. Before full examination, it emits a high-frequency pulse and self-destructs, leaving charred remnants and a distinct acrid, ozone-like smell.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Silas Thorne's Suite",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_011",
+            "sequence": 11,
+            "description": "The Detective sends the charred remnants of the self-destructed device from Silas Thorne's suite to a specialized forensic lab for detailed analysis, hoping to uncover residual data or unique material signatures.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Forensic Lab",
+            "characters_involved": [
+                "Detective"
+            ]
+        },
+        {
+            "id": "pp_012",
+            "sequence": 12,
+            "description": "The forensic team confirms the device was designed for complete data erasure but identifies microscopic residue of a synthetic polymer, non-standard in commercial electronics, used in experimental high-frequency signal dampening.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Forensic Lab",
+            "characters_involved": [
+                "Detective",
+                "Forensic Team"
+            ]
+        },
+        {
+            "id": "pp_013",
+            "sequence": 13,
+            "description": "The Detective subtly re-interviews Silas Thorne, asking for detailed elaborations on his 'complex algorithm' and 'solo ski run' alibi, looking for inconsistencies or verifiable details.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Resort Lobby / Interview Room",
+            "characters_involved": [
+                "Detective",
+                "Silas Thorne"
+            ]
+        },
+        {
+            "id": "pp_014",
+            "sequence": 14,
+            "description": "Thorne maintains a composed demeanor, providing a technically vague explanation of his algorithm and a detailed, seemingly robust ski route. However, the Detective notices a faint, unusual scuff mark on Thorne's left ski boot, inconsistent with resort skiing but indicative of navigating tight, enclosed spaces.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Resort Lobby / Interview Room",
+            "characters_involved": [
+                "Detective",
+                "Silas Thorne"
+            ]
+        },
+        {
+            "id": "pp_015",
+            "sequence": 15,
+            "description": "The Detective arranges for Professor Holt's laptop to undergo an unprecedented level of forensic analysis by a top-tier cybersecurity firm specializing in advanced persistent threats and stealthy malware, specifically targeting unique digital signatures or residual traces.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Cybersecurity Forensic Lab",
+            "characters_involved": [
+                "Detective",
+                "Professor Adrian Holt"
+            ]
+        },
+        {
+            "id": "pp_016",
+            "sequence": 16,
+            "description": "The specialized forensic team identifies a highly unusual, almost imperceptible digital signature deep within the laptop's system logs, confirming a unique, custom-designed, self-erasing malware injection that perfectly aligns with the access log glitch and EMI burst, providing irrefutable proof of external, intentional sabotage.",
+            "type": "resolution",
+            "is_red_herring": false,
+            "location_hint": "Cybersecurity Forensic Lab",
+            "characters_involved": [
+                "Detective",
+                "Professor Adrian Holt",
+                "Forensic Team"
+            ]
+        }
     ],
-    "final_story": "The scent of old paper and polished mahogany usually brought Detective Miles Corbin a measure of peace. Not today. Today, the musty quiet of Victor Sterling\u2019s lodge library felt charged, a silent witness to a truth yet unearthed. Miles ran a gloved hand over the spines of countless volumes, his gaze sharp, seeking not solace, but answers. Sterling, a man of vast intellect and even vaster secrets, had died in his sleep, a death deemed \u2018natural causes\u2019 \u2013 a verdict Miles\u2019s gut vehemently rejected.\n\nHis search was for research materials, anything that might illuminate Sterling\u2019s final days. Buried deep within a stack of modern medical journals, an anomaly caught his eye: an ancient, intricately carved wooden bookmark, wedged incongruously in a recent issue of *The Journal of Neurological Studies*. As he carefully extracted it, a faint, almost imperceptible chemical tang pricked his nostrils \u2013 something acrid, yet floral, like a forgotten poison in an apothecary.\n\nThe journal lay open to an article on a rare neurotoxin, one that meticulously mimicked natural cardiac arrest. Miles\u2019s breath hitched. What truly sent a shiver down his spine, however, were the annotations. In a neat, unfamiliar hand, specific dosages and administration methods were underlined, certain paragraphs highlighted with unnerving precision. A quick, encrypted message to Dr. Aris Thorne, a remote medical toxicologist Miles trusted implicitly, confirmed his fears. Thorne\u2019s voice, filtered through the secure line, was grave. \u201cMiles, this neurotoxin\u2026 it\u2019s a phantom. Untraceable in standard autopsies, leaves virtually no residue. And these specific methods? It suggests someone didn\u2019t just *read* about it; they understood how to *deploy* it.\u201d\n\nThe chemical smell, the precise annotations, Thorne\u2019s expert analysis \u2013 it all coalesced around one individual: Dr. Evelyn Shaw, Sterling\u2019s personal physician, a woman whose medical expertise was beyond reproach. Or so it seemed.\n\nMiles shifted his focus, discreetly approaching Mrs. Gable, the lodge\u2019s head of housekeeping. Her hands, perpetually busy, paused as he mentioned Dr. Shaw. Mrs. Gable, a woman who prided herself on discretion, fidgeted slightly. \u201cWell, now that you mention it, Detective\u2026 the day after Mr. Sterling passed, Dr. Shaw requested a rather unusual deep clean of her room. Said she\u2019d had a particularly messy research session. She supervised the disposal of a sealed waste bag herself, insisted it contained \u2018sensitive medical research materials.\u2019 Wouldn\u2019t even let the junior staff touch it.\u201d A knot tightened in Miles\u2019s stomach. *Sensitive medical research materials*? Or sensitive evidence?\n\nThe trail led him next to the digital archives of academic institutions. He delved into Dr. Shaw\u2019s background, searching for any anomaly, any hidden link to Sterling. It was a tedious hunt, sifting through years of publications, until he unearthed an obscure, early paper of hers, almost forgotten, referencing an ancient text titled *The Serpent\u2019s Whisper*. The name resonated. He knew Sterling possessed an unparalleled collection of rare, esoteric volumes. The connection, faint but undeniable, sparked a flicker of recognition.\n\nReturning to the lodge, Miles secured access to Sterling\u2019s private suite. The air was still, heavy with the phantom presence of its former occupant. His fingers brushed against a hidden compartment in Sterling\u2019s writing desk, revealing a leather-bound research diary. Its pages, however, were heavily redacted, entire sections blacked out with thick, inky lines. But one entry, dated just days before Sterling\u2019s death, remained partially visible, an urgent, scrawled confession: \"Betrayal... shared knowledge... the serpentine secret...\" The words hung in the air, a chilling premonition.\n\nMiles retrieved the ancient bookmark from his evidence bag. Under the harsh glare of a specialized UV lamp, what had seemed merely decorative transformed. An intricate symbol, almost invisible to the naked eye, sprang forth: a coiled serpent, its head poised to strike, its body forming an elaborate knot. It was the emblem of a clandestine academic society, whispered about in scholarly circles for its esoteric knowledge and ruthless secrecy.\n\nFurther investigation confirmed his growing dread. Dr. Evelyn Shaw, the esteemed physician, was not merely affiliated with this society; she was a high-ranking member, her name appearing in encrypted registries Miles painstakingly decrypted. The society, known as the Ouroboros Collective, was rumored to possess knowledge of ancient biological agents, their history laced with chilling tales of silencing members who threatened to expose their secrets \u2013 particularly those concerning \u2018ancient biological samples.\u2019\n\nHe returned to Shaw\u2019s academic work, this time with a new lens. Tucked away in an old, overlooked paper from her early career, a detailed exposition on specific neural pathways jumped out at him \u2013 the *exact* neural pathway targeted by the rare neurotoxin from the journal. And there, buried in a footnote, a vague, almost throwaway line: \"\u2026exploring novel methods of delivery for targeted neural intervention.\" The pieces were locking into place with terrifying precision.\n\nAttempts to access the Ouroboros Collective's internal records were met with digital brick walls, their encryption formidable. But then, a breakthrough. An anonymous online leak from a former, disillusioned member surfaced, mentioning a suppressed \"Serpent\u2019s Kiss\" project. It spoke of a potent compound derived from an ancient plant specimen, its effects mirroring the neurotoxin, its name eerily echoing Sterling's 'serpentine secret.'\n\nArmed with a warrant and a grim resolve, Miles conducted a covert, thorough search of Dr. Shaw\u2019s room. He meticulously scoured every surface, every crevice. His gaze finally settled on a seemingly innocuous ventilation grate. Prying it open, he ran a specialized forensic swab along its inner workings. Under the microscope, a faint, rare pollen residue shimmered. It was non-native, distinct, and consistent with the ancient plant specimen described in the \"Serpent's Kiss\" leak.\n\nNext, the lodge\u2019s security footage. He requested all recordings from the day of Sterling\u2019s death. The report came back with a chilling explanation: key footage from the dining and kitchen areas, where Sterling had taken his last meal, had been \"corrupted\" or \"overwritten\" due to a reported \"blizzard-related power surge.\" The timing was too precise, the excuse too convenient. Deliberate sabotage.\n\nHe returned to Sterling\u2019s library, his attention now laser-focused on the missing ancient text, *The Serpent\u2019s Whisper*, referenced in Shaw\u2019s early paper. He found the precise spot where it should have been \u2013 an empty space on the shelf, a fresh indentation in the dust. His fingers probed the void. Behind the former position of the book, tucked deep into the recess, was a folded piece of paper. Not Sterling\u2019s elegant hand, but a hurried, almost frantic scrawl: \"They're onto us. The original is gone.\"\n\nThe final confrontation took place in Dr. Shaw\u2019s office, the air thick with unspoken accusations. Miles laid out the evidence with a quiet, devastating precision. Her composure, once so unshakeable, began to crack. He spoke of the rare, non-native pollen in her hidden vent, a silent witness to the ancient plant. He detailed her specific, esoteric expertise, perfectly aligning with the neurotoxin\u2019s mechanism and delivery. He mentioned the suppressed \"Serpent\u2019s Kiss\" project, its name hanging like a death knell in the room. He described the corrupted security footage, a gaping hole in the timeline of Sterling\u2019s last hours. And finally, he presented the cryptic note, the empty space on Sterling\u2019s shelf where *The Serpent\u2019s Whisper* once lay.\n\n\"You poisoned Victor Sterling, Dr. Shaw,\" Miles stated, his voice devoid of emotion, \"to prevent him from exposing you.\"\n\nHer face, previously a mask of cool professionalism, shattered. A guttural scream ripped from her throat, a mix of rage and desperation. \"He was going to ruin me! He found out! He knew the truth about my research, about my acclaimed genetic work \u2013 it wasn't mine! It was all from that ancient text, his text! He was going to expose my fraud, destroy everything! I had no choice, Detective! He left me no choice!\"\n\nHer confession echoed through the lodge\u2019s hushed corridors. Alerted by the commotion, lodge staff rushed in, their faces a mixture of shock and horror. Dr. Evelyn Shaw, the esteemed physician, was apprehended, her meticulously crafted life unraveling around her, brought down by a forgotten bookmark, a faint smell, and the relentless pursuit of truth."
+    "plot_holes_fixed": [
+        "The kitchen electrical surge is explicitly identified as a red herring to mislead the investigation from the true source of interference.",
+        "The self-destructing device is consistently handled, with only its remnants and unique polymer residue providing physical evidence, maintaining state continuity.",
+        "The figure in the maintenance jacket is subtly linked to Silas Thorne through his research and the scuff mark on his boot, integrating this initial visual clue into the main evidence chain.",
+        "Professor Holt's expertise is leveraged to explain the technical nature of the attack, providing a credible link to Silas Thorne's specific theoretical work."
+    ],
+    "annotated_plot_points": [
+        {
+            "id": "pp_001",
+            "sequence": 1,
+            "description": "The Detective interviews lodge security personnel and reviews digital access logs for Professor Holt's suite and general resort activity during the critical timeframe, seeking discrepancies or unauthorized access.",
+            "type": "event",
+            "is_red_herring": false,
+            "location_hint": "Resort Security Office",
+            "characters_involved": [
+                "Detective",
+                "Security Personnel"
+            ],
+            "preconditions": [
+                {
+                    "description": "Player must be in the security office.",
+                    "type": "player_location",
+                    "value": "Resort Security Office"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "The detective reviews the digital access logs.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "reviewed_digital_access_logs"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_001",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_002",
+            "sequence": 2,
+            "description": "Security reports an inexplicable 'glitch' in Holt's suite access logs, creating a period of unrecorded activity. Simultaneously, a maintenance report notes a minor, quickly resolved electrical surge in the kitchen area, attributed to a faulty appliance.",
+            "type": "obstacle",
+            "is_red_herring": true,
+            "location_hint": "Resort Security Office",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 001 must be completed.",
+                    "type": "plot_point_completed",
+                    "value": "pp_001"
+                },
+                {
+                    "description": "Player must be in the security office.",
+                    "type": "player_location",
+                    "value": "Resort Security Office"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player learns about the access log glitch in Holt's suite.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_access_log_glitch"
+                },
+                {
+                    "description": "Player learns about the kitchen electrical surge (red herring).",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_kitchen_electrical_surge"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_002",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_003",
+            "sequence": 3,
+            "description": "The Detective reviews all available security camera footage from hallways, stairwells, and service entrances, covering the period just before, during, and after the access log 'glitch' to track movements near Holt's suite and the IT server room.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Resort Security Office",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 002 must be completed (glitch discovered).",
+                    "type": "plot_point_completed",
+                    "value": "pp_002"
+                },
+                {
+                    "description": "Player must be in the security office.",
+                    "type": "player_location",
+                    "value": "Resort Security Office"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player initiates review of security camera footage.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "initiated_footage_review"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_003",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_004",
+            "sequence": 4,
+            "description": "Footage near Holt's suite shows brief electromagnetic interference causing a static burst on cameras at the moment of the log glitch. Prior to this, a figure in a resort maintenance jacket, face obscured, is seen briefly entering and exiting a utility closet near the IT server room.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Resort Hallways and Utility Closet",
+            "characters_involved": [
+                "Detective",
+                "Figure in Maintenance Jacket"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 003 must be completed (footage review initiated).",
+                    "type": "plot_point_completed",
+                    "value": "pp_003"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player learns about the EMI burst and the figure in a maintenance jacket near the IT server room.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_emi_figure_in_jacket"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_004",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        },
+        {
+            "id": "pp_005",
+            "sequence": 5,
+            "description": "The Detective consults Professor Holt, presenting evidence of the localized electromagnetic interference and access log 'glitch', seeking his expert opinion on the execution and purpose of such an attack.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Professor Holt's Suite",
+            "characters_involved": [
+                "Detective",
+                "Professor Adrian Holt"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 004 must be completed (EMI and figure found).",
+                    "type": "plot_point_completed",
+                    "value": "pp_004"
+                },
+                {
+                    "description": "Player must know about the EMI and the access log glitch.",
+                    "type": "knows_fact",
+                    "value": "known_emi_figure_in_jacket"
+                },
+                {
+                    "description": "Player must be in Professor Holt's suite.",
+                    "type": "player_location",
+                    "value": "Professor Holt's Suite"
+                },
+                {
+                    "description": "Professor Adrian Holt must be present.",
+                    "type": "npc_present",
+                    "value": "Professor Adrian Holt"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_005",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_006",
+            "sequence": 6,
+            "description": "Professor Holt explains that sophisticated, localized EMI could disable security or mask data transfer, revealing that a rival, known for expertise in electromagnetic cryptography, once theorized a similar 'ghost attack' method.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Professor Holt's Suite",
+            "characters_involved": [
+                "Professor Adrian Holt"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 005 must be completed (Holt consulted).",
+                    "type": "plot_point_completed",
+                    "value": "pp_005"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player learns about localized EMI capabilities and Holt's rival's 'ghost attack' theory.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_holts_rival_ghost_attack_theory"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_006",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        },
+        {
+            "id": "pp_007",
+            "sequence": 7,
+            "description": "The Detective discreetly investigates Silas Thorne's past publications and research interests for any references to advanced electromagnetic interference or 'ghost attack' methodologies.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Detective's Office / Academic Databases",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 006 must be completed (Holt's rival theory learned).",
+                    "type": "plot_point_completed",
+                    "value": "pp_006"
+                },
+                {
+                    "description": "Player must know about Holt's rival's 'ghost attack' theory.",
+                    "type": "knows_fact",
+                    "value": "known_holts_rival_ghost_attack_theory"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_007",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_008",
+            "sequence": 8,
+            "description": "The Detective uncovers an obscure academic paper co-authored by Silas Thorne outlining a theoretical framework for 'localized, transient electromagnetic pulse generation for secure data transfer disruption', strikingly similar to Holt's 'ghost attack' description.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Academic Databases",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 007 must be completed (Thorne investigated).",
+                    "type": "plot_point_completed",
+                    "value": "pp_007"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player uncovers Silas Thorne's academic paper on EMP generation.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_thornes_emp_paper"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_008",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        },
+        {
+            "id": "pp_009",
+            "sequence": 9,
+            "description": "The Detective arranges a discreet 'fire alarm inspection' of Silas Thorne's private suite to search for hidden electronic devices or components related to electromagnetic interference.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Silas Thorne's Suite",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 008 must be completed (Thorne's paper found).",
+                    "type": "plot_point_completed",
+                    "value": "pp_008"
+                },
+                {
+                    "description": "Player must be in Silas Thorne's Suite.",
+                    "type": "player_location",
+                    "value": "Silas Thorne's Suite"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_009",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_010",
+            "sequence": 10,
+            "description": "During the inspection, a hidden compartment in Thorne's desk reveals a small, custom-built device. Before full examination, it emits a high-frequency pulse and self-destructs, leaving charred remnants and a distinct acrid, ozone-like smell.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Silas Thorne's Suite",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 009 must be completed (inspection arranged).",
+                    "type": "plot_point_completed",
+                    "value": "pp_009"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player discovers Thorne's self-destructing device remnants.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_thornes_device_remnants"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_010",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        },
+        {
+            "id": "pp_011",
+            "sequence": 11,
+            "description": "The Detective sends the charred remnants of the self-destructed device from Silas Thorne's suite to a specialized forensic lab for detailed analysis, hoping to uncover residual data or unique material signatures.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Forensic Lab",
+            "characters_involved": [
+                "Detective"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 010 must be completed (device remnants found).",
+                    "type": "plot_point_completed",
+                    "value": "pp_010"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_011",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_012",
+            "sequence": 12,
+            "description": "The forensic team confirms the device was designed for complete data erasure but identifies microscopic residue of a synthetic polymer, non-standard in commercial electronics, used in experimental high-frequency signal dampening.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Forensic Lab",
+            "characters_involved": [
+                "Detective",
+                "Forensic Team"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 011 must be completed (remnants sent for analysis).",
+                    "type": "plot_point_completed",
+                    "value": "pp_011"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player learns about the synthetic polymer residue on Thorne's device.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_synthetic_polymer_residue"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_012",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        },
+        {
+            "id": "pp_013",
+            "sequence": 13,
+            "description": "The Detective subtly re-interviews Silas Thorne, asking for detailed elaborations on his 'complex algorithm' and 'solo ski run' alibi, looking for inconsistencies or verifiable details.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Resort Lobby / Interview Room",
+            "characters_involved": [
+                "Detective",
+                "Silas Thorne"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 012 must be completed (forensic results known).",
+                    "type": "plot_point_completed",
+                    "value": "pp_012"
+                },
+                {
+                    "description": "Player must be in the Resort Lobby or Interview Room.",
+                    "type": "player_location",
+                    "value": "Resort Lobby / Interview Room"
+                },
+                {
+                    "description": "Silas Thorne must be present.",
+                    "type": "npc_present",
+                    "value": "Silas Thorne"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_013",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_014",
+            "sequence": 14,
+            "description": "Thorne maintains a composed demeanor, providing a technically vague explanation of his algorithm and a detailed, seemingly robust ski route. However, the Detective notices a faint, unusual scuff mark on Thorne's left ski boot, inconsistent with resort skiing but indicative of navigating tight, enclosed spaces.",
+            "type": "clue",
+            "is_red_herring": false,
+            "location_hint": "Resort Lobby / Interview Room",
+            "characters_involved": [
+                "Detective",
+                "Silas Thorne"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 013 must be completed (Thorne re-interviewed).",
+                    "type": "plot_point_completed",
+                    "value": "pp_013"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player notices the unusual scuff mark on Thorne's ski boot.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_scuff_mark_on_thornes_boot"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_014",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        },
+        {
+            "id": "pp_015",
+            "sequence": 15,
+            "description": "The Detective arranges for Professor Holt's laptop to undergo an unprecedented level of forensic analysis by a top-tier cybersecurity firm specializing in advanced persistent threats and stealthy malware, specifically targeting unique digital signatures or residual traces.",
+            "type": "action",
+            "is_red_herring": false,
+            "location_hint": "Cybersecurity Forensic Lab",
+            "characters_involved": [
+                "Detective",
+                "Professor Adrian Holt"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 014 must be completed (scuff mark found).",
+                    "type": "plot_point_completed",
+                    "value": "pp_014"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_015",
+                    "value": "done"
+                }
+            ],
+            "is_protected": false
+        },
+        {
+            "id": "pp_016",
+            "sequence": 16,
+            "description": "The specialized forensic team identifies a highly unusual, almost imperceptible digital signature deep within the laptop's system logs, confirming a unique, custom-designed, self-erasing malware injection that perfectly aligns with the access log glitch and EMI burst, providing irrefutable proof of external, intentional sabotage.",
+            "type": "resolution",
+            "is_red_herring": false,
+            "location_hint": "Cybersecurity Forensic Lab",
+            "characters_involved": [
+                "Detective",
+                "Professor Adrian Holt",
+                "Forensic Team"
+            ],
+            "preconditions": [
+                {
+                    "description": "Plot point 015 must be completed (laptop sent for analysis).",
+                    "type": "plot_point_completed",
+                    "value": "pp_015"
+                }
+            ],
+            "effects": [
+                {
+                    "description": "Player gains irrefutable proof of sabotage via custom malware.",
+                    "type": "gain_knowledge",
+                    "target_id": "player",
+                    "value": "known_irrefutable_sabotage_proof"
+                },
+                {
+                    "description": "Marks this plot point as completed.",
+                    "type": "complete_plot_point",
+                    "target_id": "pp_016",
+                    "value": "done"
+                }
+            ],
+            "is_protected": true
+        }
+    ],
+    "protected_variables": [
+        {
+            "description": "Knowledge of the electromagnetic interference and the figure in a maintenance jacket is crucial evidence.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_emi_figure_in_jacket",
+            "needed_for_plot_point_id": "pp_005"
+        },
+        {
+            "description": "Knowledge of Professor Holt's rival's 'ghost attack' theory is vital for identifying a suspect.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_holts_rival_ghost_attack_theory",
+            "needed_for_plot_point_id": "pp_007"
+        },
+        {
+            "description": "Knowledge of Silas Thorne's academic paper on EMP generation directly links him to the method.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_thornes_emp_paper",
+            "needed_for_plot_point_id": "pp_009"
+        },
+        {
+            "description": "The physical remnants of Thorne's self-destructing device are key evidence.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_thornes_device_remnants",
+            "needed_for_plot_point_id": "pp_011"
+        },
+        {
+            "description": "The unique synthetic polymer residue found on Thorne's device provides technical proof.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_synthetic_polymer_residue",
+            "needed_for_plot_point_id": "pp_013"
+        },
+        {
+            "description": "The scuff mark on Thorne's ski boot is a critical physical link to the scene.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_scuff_mark_on_thornes_boot",
+            "needed_for_plot_point_id": "pp_015"
+        },
+        {
+            "description": "The final irrefutable proof of sabotage is the ultimate goal of the investigation.",
+            "object_or_npc_id": "player",
+            "required_condition": "known_irrefutable_sabotage_proof",
+            "needed_for_plot_point_id": "pp_016"
+        }
+    ],
+    "dependency_graph": [
+        {
+            "plot_point_id": "pp_001",
+            "depends_on": [],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_002",
+            "depends_on": [
+                "pp_001"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "The access log glitch in Holt's suite is known.",
+                    "must_remain_true_from_id": "pp_002",
+                    "must_remain_true_until_id": "pp_016"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_003",
+            "depends_on": [
+                "pp_002"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_004",
+            "depends_on": [
+                "pp_003"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "Evidence of EMI and a suspicious figure in a maintenance jacket near the IT server room is known.",
+                    "must_remain_true_from_id": "pp_004",
+                    "must_remain_true_until_id": "pp_016"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_005",
+            "depends_on": [
+                "pp_002",
+                "pp_004"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_006",
+            "depends_on": [
+                "pp_005"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "Holt's rival's 'ghost attack' theory is known.",
+                    "must_remain_true_from_id": "pp_006",
+                    "must_remain_true_until_id": "pp_008"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_007",
+            "depends_on": [
+                "pp_006"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_008",
+            "depends_on": [
+                "pp_007"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "Silas Thorne's EMP paper is known.",
+                    "must_remain_true_from_id": "pp_008",
+                    "must_remain_true_until_id": "pp_010"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_009",
+            "depends_on": [
+                "pp_008"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_010",
+            "depends_on": [
+                "pp_009"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "Thorne's self-destructed device remnants are known.",
+                    "must_remain_true_from_id": "pp_010",
+                    "must_remain_true_until_id": "pp_012"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_011",
+            "depends_on": [
+                "pp_010"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_012",
+            "depends_on": [
+                "pp_011"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "The synthetic polymer residue on Thorne's device is known.",
+                    "must_remain_true_from_id": "pp_012",
+                    "must_remain_true_until_id": "pp_015"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_013",
+            "depends_on": [
+                "pp_012"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_014",
+            "depends_on": [
+                "pp_013"
+            ],
+            "causal_spans": [
+                {
+                    "condition_description": "The unusual scuff mark on Thorne's ski boot is known.",
+                    "must_remain_true_from_id": "pp_014",
+                    "must_remain_true_until_id": "pp_016"
+                }
+            ]
+        },
+        {
+            "plot_point_id": "pp_015",
+            "depends_on": [
+                "pp_014"
+            ],
+            "causal_spans": []
+        },
+        {
+            "plot_point_id": "pp_016",
+            "depends_on": [
+                "pp_015"
+            ],
+            "causal_spans": []
+        }
+    ],
+    "world_graph": {
+        "rooms": [
+            {
+                "id": "lodge_main_lobby",
+                "name": "Peak Vista Lodge Lobby",
+                "description": "The grand entrance to Peak Vista Lodge, now eerily quiet. A towering stone fireplace dominates one wall, its embers glowing softly. Snow blankets the large windows, sealing the resort off from the world.",
+                "connections": [
+                    {
+                        "direction": "north",
+                        "to_room_id": "resort_hallway_north",
+                        "label": "To the North Wing"
+                    },
+                    {
+                        "direction": "east",
+                        "to_room_id": "resort_hallway_east",
+                        "label": "To the East Wing"
+                    },
+                    {
+                        "direction": "west",
+                        "to_room_id": "resort_hallway_west",
+                        "label": "To the West Wing"
+                    },
+                    {
+                        "direction": "south",
+                        "to_room_id": "lodge_main_lounge",
+                        "label": "Into the Main Lounge"
+                    },
+                    {
+                        "direction": "inside",
+                        "to_room_id": "interview_room",
+                        "label": "To the Interview Room"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_013",
+                    "pp_014"
+                ]
+            },
+            {
+                "id": "resort_hallway_north",
+                "name": "North Wing Hallway",
+                "description": "A plushly carpeted hallway lined with guest suite doors. The air is slightly cooler here, a testament to the blizzard raging outside. Footsteps echo, emphasizing the unsettling quiet.",
+                "connections": [
+                    {
+                        "direction": "south",
+                        "to_room_id": "lodge_main_lobby",
+                        "label": "Back to the Lobby"
+                    },
+                    {
+                        "direction": "east",
+                        "to_room_id": "professor_holt_suite",
+                        "label": "Professor Holt's Suite"
+                    },
+                    {
+                        "direction": "west",
+                        "to_room_id": "silas_thorne_suite",
+                        "label": "Silas Thorne's Suite"
+                    },
+                    {
+                        "direction": "north",
+                        "to_room_id": "wellness_center",
+                        "label": "Towards the Wellness Center"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "resort_hallway_east",
+                "name": "East Wing Hallway",
+                "description": "This corridor leads towards the service areas and public facilities. The scent of pine cleaner and stale coffee subtly hangs in the air, a stark contrast to the luxurious lobby.",
+                "connections": [
+                    {
+                        "direction": "west",
+                        "to_room_id": "lodge_main_lobby",
+                        "label": "Back to the Lobby"
+                    },
+                    {
+                        "direction": "north",
+                        "to_room_id": "lodge_kitchen",
+                        "label": "Towards the Kitchen"
+                    },
+                    {
+                        "direction": "east",
+                        "to_room_id": "lodge_library",
+                        "label": "To the Lodge Library"
+                    },
+                    {
+                        "direction": "south",
+                        "to_room_id": "resort_security_office",
+                        "label": "To the Security Office"
+                    },
+                    {
+                        "direction": "door",
+                        "to_room_id": "utility_closet",
+                        "label": "A maintenance closet"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "resort_hallway_west",
+                "name": "West Wing Hallway",
+                "description": "A quieter hallway, less frequented by guests. It feels somewhat improvised, with a few doors leading to what might be staff-only areas or temporary setups. The hum of electronics can be faintly heard.",
+                "connections": [
+                    {
+                        "direction": "east",
+                        "to_room_id": "lodge_main_lobby",
+                        "label": "Back to the Lobby"
+                    },
+                    {
+                        "direction": "north",
+                        "to_room_id": "detective_office",
+                        "label": "To the Improvised Detective's Office"
+                    },
+                    {
+                        "direction": "south",
+                        "to_room_id": "forensic_lab",
+                        "label": "To the Makeshift Forensic Lab"
+                    },
+                    {
+                        "direction": "west",
+                        "to_room_id": "cybersecurity_forensic_lab",
+                        "label": "To the Cybersecurity Lab"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "lodge_main_lounge",
+                "name": "Lodge Main Lounge",
+                "description": "A vast, comfortable space with deep leather armchairs and another grand fireplace. It's usually bustling with activity, but now it's deserted, the silence amplifying the crackle of the fire.",
+                "connections": [
+                    {
+                        "direction": "north",
+                        "to_room_id": "lodge_main_lobby",
+                        "label": "Back to the Lobby"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "professor_holt_suite",
+                "name": "Professor Holt's Private Suite",
+                "description": "The opulent private suite of Professor Holt. It's meticulously tidy, almost sterile, with advanced research papers scattered neatly on a desk. A faint scent of old books and something metallic lingers.",
+                "connections": [
+                    {
+                        "direction": "west",
+                        "to_room_id": "resort_hallway_north",
+                        "label": "Out to the North Wing Hallway"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_005",
+                    "pp_006"
+                ]
+            },
+            {
+                "id": "silas_thorne_suite",
+                "name": "Silas Thorne's Private Suite",
+                "description": "Silas Thorne's suite is a whirlwind of expensive taste and disarray. Designer clothes are strewn across a chaise lounge, and empty champagne flutes sit on a bedside table, hinting at recent indulgence.",
+                "connections": [
+                    {
+                        "direction": "east",
+                        "to_room_id": "resort_hallway_north",
+                        "label": "Out to the North Wing Hallway"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_009",
+                    "pp_010"
+                ]
+            },
+            {
+                "id": "wellness_center",
+                "name": "The Wellness Center",
+                "description": "A serene space designed for relaxation and exercise, currently abandoned. Yoga mats are neatly rolled, and the air smells faintly of lavender and chlorine, a stark contrast to the storm outside.",
+                "connections": [
+                    {
+                        "direction": "south",
+                        "to_room_id": "resort_hallway_north",
+                        "label": "Out to the North Wing Hallway"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "lodge_kitchen",
+                "name": "The Lodge Kitchen",
+                "description": "The massive commercial kitchen of the lodge, now mostly dark and silent. Stainless steel surfaces gleam under the emergency lights, and the faint aroma of cooked meals lingers, a ghost of happier times.",
+                "connections": [
+                    {
+                        "direction": "south",
+                        "to_room_id": "resort_hallway_east",
+                        "label": "Out to the East Wing Hallway"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "lodge_library",
+                "name": "The Lodge Library",
+                "description": "A quiet, wood-paneled room filled with shelves of books and comfortable reading chairs. The scent of aged paper and leather is strong. It offers a brief respite from the tension, yet secrets could easily be hidden amongst the tomes.",
+                "connections": [
+                    {
+                        "direction": "west",
+                        "to_room_id": "resort_hallway_east",
+                        "label": "Out to the East Wing Hallway"
+                    }
+                ],
+                "story_event_ids": []
+            },
+            {
+                "id": "resort_security_office",
+                "name": "Resort Security Office",
+                "description": "A small, functional room filled with surveillance monitors, most displaying static or snow. Empty coffee cups and cold pizza boxes suggest a recent, hurried departure. The air is thick with the scent of ozone and stale desperation.",
+                "connections": [
+                    {
+                        "direction": "north",
+                        "to_room_id": "resort_hallway_east",
+                        "label": "Out to the East Wing Hallway"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_001",
+                    "pp_002",
+                    "pp_003"
+                ]
+            },
+            {
+                "id": "utility_closet",
+                "name": "Utility Closet",
+                "description": "A cramped, dimly lit space filled with cleaning supplies, spare linens, and various maintenance tools. The air is stale and smells faintly of bleach and dust. It's the kind of place easily overlooked, perfect for hiding secrets.",
+                "connections": [
+                    {
+                        "direction": "outside",
+                        "to_room_id": "resort_hallway_east",
+                        "label": "Out to the East Wing Hallway"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_004"
+                ]
+            },
+            {
+                "id": "detective_office",
+                "name": "Detective's Improvised Office",
+                "description": "A former small conference room, hastily converted into a detective's workspace. Maps are tacked to the walls, and a laptop glows on the table amidst scattered notes and empty energy drink cans. The scent of strong coffee hangs heavy.",
+                "connections": [
+                    {
+                        "direction": "south",
+                        "to_room_id": "resort_hallway_west",
+                        "label": "Out to the West Wing Hallway"
+                    },
+                    {
+                        "direction": "inside",
+                        "to_room_id": "academic_databases_room",
+                        "label": "To the Academic Databases Access Point"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_007"
+                ]
+            },
+            {
+                "id": "academic_databases_room",
+                "name": "Academic Databases Access Point",
+                "description": "A small, temporary setup within the detective's office, featuring a high-speed satellite internet connection and a dedicated terminal. The screen displays complex search fields, ready to delve into the digital world.",
+                "connections": [
+                    {
+                        "direction": "outside",
+                        "to_room_id": "detective_office",
+                        "label": "Back to the Detective's Office"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_007",
+                    "pp_008"
+                ]
+            },
+            {
+                "id": "forensic_lab",
+                "name": "Makeshift Forensic Lab",
+                "description": "What was once a small spa treatment room is now a makeshift forensic lab. Tables are covered with sterile cloths, and various tools, chemicals, and evidence bags are laid out. A faint, clinical smell pervades the air.",
+                "connections": [
+                    {
+                        "direction": "north",
+                        "to_room_id": "resort_hallway_west",
+                        "label": "Out to the West Wing Hallway"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_011",
+                    "pp_012"
+                ]
+            },
+            {
+                "id": "interview_room",
+                "name": "Interview Room",
+                "description": "A small, private room adjacent to the lobby, typically used for VIP check-ins or small meetings. Today, it's set up with two chairs facing each other, a stark setting for intense conversations. The atmosphere is tense, heavy with unspoken words.",
+                "connections": [
+                    {
+                        "direction": "outside",
+                        "to_room_id": "lodge_main_lobby",
+                        "label": "Back to the Lobby"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_013",
+                    "pp_014"
+                ]
+            },
+            {
+                "id": "cybersecurity_forensic_lab",
+                "name": "Cybersecurity Forensic Lab",
+                "description": "A dedicated space, likely a converted server room, now buzzing with the low hum of specialized computer equipment. Screens display lines of code and network diagrams, hinting at a deep dive into digital secrets. The air feels charged with electricity.",
+                "connections": [
+                    {
+                        "direction": "east",
+                        "to_room_id": "resort_hallway_west",
+                        "label": "Out to the West Wing Hallway"
+                    }
+                ],
+                "story_event_ids": [
+                    "pp_015",
+                    "pp_016"
+                ]
+            },
+            {
+                "id": "location_outside_lodge",
+                "name": "Outside the Lodge",
+                "description": "The biting cold of the mountain air immediately assaults you as you step out of the Peak Vista Lodge. Snow drifts are piled high, and the wind howls, carrying a fine spray of ice crystals. The vast, snow-covered peaks loom around you, shrouded in a perpetual, swirling mist. It's dangerously cold, and visibility is poor due to the ongoing blizzard.",
+                "connections": [
+                    {
+                        "direction": "back",
+                        "to_room_id": "peak_vista_lodge_lobby",
+                        "label": "back the way you came"
+                    }
+                ],
+                "story_event_ids": []
+            }
+        ],
+        "starting_room_id": "lodge_main_lobby"
+    },
+    "objects": [
+        {
+            "id": "security_system_computer",
+            "name": "Security System Computer",
+            "description": "A computer displaying digital access logs and security camera footage for the resort.",
+            "location_id": "resort_security_office",
+            "can_be_picked_up": false,
+            "linked_plot_point_id": "pp_001",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "maintenance_report",
+            "name": "Maintenance Report",
+            "description": "A paper document detailing a minor electrical surge in the kitchen area, attributed to a faulty appliance.",
+            "location_id": "resort_security_office",
+            "can_be_picked_up": true,
+            "linked_plot_point_id": "pp_002",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "detectives_laptop",
+            "name": "Detective's Laptop",
+            "description": "A standard issue laptop used by the detective for investigation, capable of displaying evidence.",
+            "location_id": "detective_office",
+            "can_be_picked_up": true,
+            "linked_plot_point_id": "pp_005",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "academic_database_terminal",
+            "name": "Academic Database Terminal",
+            "description": "A computer terminal providing access to various academic publications and research papers.",
+            "location_id": "academic_databases_room",
+            "can_be_picked_up": false,
+            "linked_plot_point_id": "pp_007",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "thornes_desk",
+            "name": "Silas Thorne's Desk",
+            "description": "A sturdy desk in Silas Thorne's suite, containing a hidden compartment.",
+            "location_id": "silas_thorne_suite",
+            "can_be_picked_up": false,
+            "linked_plot_point_id": "pp_010",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "self_destructed_device_remnants",
+            "name": "Self-Destructed Device Remnants",
+            "description": "Charred remains of a small, custom-built electronic device with an acrid, ozone-like smell.",
+            "location_id": "silas_thorne_suite",
+            "can_be_picked_up": true,
+            "linked_plot_point_id": "pp_010",
+            "is_protected": true,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "forensic_lab_equipment",
+            "name": "Forensic Lab Equipment",
+            "description": "Specialized equipment used for analyzing physical evidence, such as microscopic residues.",
+            "location_id": "forensic_lab",
+            "can_be_picked_up": false,
+            "linked_plot_point_id": "pp_012",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "silas_thornes_ski_boot",
+            "name": "Silas Thorne's Ski Boot",
+            "description": "Silas Thorne's left ski boot, with a faint, unusual scuff mark inconsistent with resort skiing.",
+            "location_id": "silas_thorne_suite",
+            "can_be_picked_up": true,
+            "linked_plot_point_id": "pp_013",
+            "is_protected": true,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "professor_holts_laptop",
+            "name": "Professor Holt's Laptop",
+            "description": "Professor Holt's personal laptop, containing sensitive data and potential evidence of cyberattack.",
+            "location_id": "professor_holt_suite",
+            "can_be_picked_up": true,
+            "linked_plot_point_id": "pp_015",
+            "is_protected": true,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "cybersecurity_forensic_equipment",
+            "name": "Cybersecurity Forensic Equipment",
+            "description": "Advanced equipment used by a top-tier cybersecurity firm for deep forensic analysis of digital systems.",
+            "location_id": "cybersecurity_forensic_lab",
+            "can_be_picked_up": false,
+            "linked_plot_point_id": "pp_016",
+            "is_protected": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {}
+        },
+        {
+            "id": "soiled_pants",
+            "name": "soiled pants",
+            "description": "A pair of pants, now unfortunately soiled and emitting a very strong, unpleasant odor. You are currently wearing them.",
+            "can_be_picked_up": true,
+            "visible": true,
+            "in_inventory": false,
+            "state": {},
+            "is_protected": false,
+            "linked_plot_point_id": "",
+            "location_id": "player_location"
+        },
+        {
+            "id": "player_pants",
+            "name": "Your Pants",
+            "description": "A pair of pants, recently removed. They may be clean or soiled, depending on their previous state.",
+            "can_be_picked_up": true,
+            "visible": true,
+            "in_inventory": false,
+            "state": {},
+            "is_protected": false,
+            "linked_plot_point_id": "",
+            "location_id": "peak_vista_lodge_lobby"
+        },
+        {
+            "id": "pile_of_clothes",
+            "name": "pile of clothes",
+            "description": "A haphazard heap of all your previously worn garments, now discarded on the floor.",
+            "can_be_picked_up": true,
+            "visible": true,
+            "in_inventory": false,
+            "state": {},
+            "is_protected": false,
+            "linked_plot_point_id": "",
+            "location_id": "present"
+        },
+        {
+            "id": "object_lodge_exit_door",
+            "name": "Lodge Exit Door",
+            "description": "A heavy, insulated wooden door, designed to keep the mountain's harsh elements at bay. It appears to lead directly outside.",
+            "can_be_picked_up": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {},
+            "is_protected": false,
+            "linked_plot_point_id": "",
+            "location_id": "peak_vista_lodge_lobby"
+        }
+    ],
+    "npcs": [
+        {
+            "id": "willow_holt",
+            "name": "Willow Holt",
+            "current_location_id": "professor_holt_suite",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "elara_vance",
+            "name": "Elara Vance",
+            "current_location_id": "lodge_main_lobby",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "marcus_mac_chen",
+            "name": "Marcus 'Mac' Chen",
+            "current_location_id": "lodge_library",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "dr_evelyn_shaw",
+            "name": "Dr. Evelyn Shaw",
+            "current_location_id": "wellness_center",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "silas_thorne",
+            "name": "Silas Thorne",
+            "current_location_id": "silas_thorne_suite",
+            "can_move": true,
+            "linked_plot_point_ids": [
+                "pp_013",
+                "pp_014"
+            ],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "jasmine_khan",
+            "name": "Jasmine Khan",
+            "current_location_id": "lodge_main_lounge",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "leo_bellwether",
+            "name": "Leo Bellwether",
+            "current_location_id": "resort_security_office",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "liam_shaw",
+            "name": "Liam Shaw",
+            "current_location_id": "lodge_kitchen",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "penelope_penny_hayes",
+            "name": "Penelope 'Penny' Hayes",
+            "current_location_id": "lodge_library",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "sebastian_reed",
+            "name": "Sebastian Reed",
+            "current_location_id": "lodge_main_lounge",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "octavia_sterling",
+            "name": "Octavia Sterling",
+            "current_location_id": "lodge_main_lobby",
+            "can_move": true,
+            "linked_plot_point_ids": [],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "security_personnel",
+            "name": "Security Personnel",
+            "current_location_id": "resort_security_office",
+            "can_move": true,
+            "linked_plot_point_ids": [
+                "pp_001"
+            ],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "professor_adrian_holt",
+            "name": "Professor Adrian Holt",
+            "current_location_id": "professor_holt_suite",
+            "can_move": true,
+            "linked_plot_point_ids": [
+                "pp_005",
+                "pp_006",
+                "pp_015",
+                "pp_016"
+            ],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "mysterious_figure_maintenance_jacket",
+            "name": "Mysterious Figure in Maintenance Jacket",
+            "current_location_id": "utility_closet",
+            "can_move": true,
+            "linked_plot_point_ids": [
+                "pp_004"
+            ],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        },
+        {
+            "id": "forensic_team",
+            "name": "Forensic Team",
+            "current_location_id": "forensic_lab",
+            "can_move": false,
+            "linked_plot_point_ids": [
+                "pp_012",
+                "pp_016"
+            ],
+            "state": {
+                "alive": true,
+                "interrogated": false
+            }
+        }
+    ],
+    "player_state": {
+        "current_location_id": "lodge_main_lobby",
+        "inventory": [],
+        "knowledge": [],
+        "skills": []
+    },
+    "action_rules": [
+        {
+            "id": "rule_poop_pants",
+            "verb": "poop",
+            "description": "The player intentionally soils their pants. This action is irreversible without cleaning or changing clothes.",
+            "preconditions": [
+                {
+                    "description": "You are not currently wearing soiled pants.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_soiled_pants:false"
+                },
+                {
+                    "description": "You are wearing pants.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_pants:true"
+                }
+            ],
+            "effects_description": "Your current pants are replaced by a pair of soiled pants. A distinct foul odor now emanates from you. You feel acutely uncomfortable and embarrassed, which may affect interactions with NPCs and could make you more noticeable due to the smell."
+        },
+        {
+            "id": "rule_contemplate_filth",
+            "verb": "contemplate_filth",
+            "description": "The player deeply contemplates the state of their soiled pants, observing their changing appearance and allowing themselves to fully experience the emanating odor.",
+            "preconditions": [
+                {
+                    "description": "You must be wearing soiled pants.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_soiled_pants:true"
+                },
+                {
+                    "description": "You have not yet fully internalized the experience of your soiled pants.",
+                    "type": "object_state",
+                    "value": "player_has_internalized_filth:false"
+                }
+            ],
+            "effects_description": "As you contemplate, your pants visibly darken and appear more 'aged'. Simultaneously, your senses adapt, and the once-repulsive odor begins to register as something less offensive, perhaps even intriguing. You gain a new mental state where you are less bothered by the smell and appearance of your soiled pants, and may even derive a strange comfort from it."
+        },
+        {
+            "id": "rule_remove_and_throw_pants",
+            "verb": "throw_pants",
+            "description": "The player removes their pants and throws them at Elera.",
+            "preconditions": [
+                {
+                    "description": "You must be currently wearing pants.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_pants:true"
+                },
+                {
+                    "description": "Elera must be present in your current location.",
+                    "type": "npc_present",
+                    "value": "elera"
+                }
+            ],
+            "effects_description": "You are now naked from the waist down. Your pants, whether clean or soiled, become an object on the ground in your current location. Elera is startled and reacts with a strong negative emotion (e.g., shock, disgust, anger) to being targeted by your thrown garment. This action may also attract the attention and judgment of any other NPCs present."
+        },
+        {
+            "id": "rule_remove_pants",
+            "verb": "remove_pants",
+            "description": "The player removes their pants, making them naked from the waist down.",
+            "preconditions": [
+                {
+                    "description": "You must be currently wearing pants.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_pants:true"
+                }
+            ],
+            "effects_description": "You are now naked from the waist down. Your pants, whether clean or soiled, become an object on the ground in your current location. This action may attract the attention and judgment of any NPCs present, and you might feel a sudden chill."
+        },
+        {
+            "id": "rule_undress_completely",
+            "verb": "undress_completely",
+            "description": "The player removes all their clothing, becoming completely naked. This action is driven by a desire to clear one's mind, believing clothing hinders thought.",
+            "preconditions": [
+                {
+                    "description": "You must be currently wearing clothes.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_clothes:true"
+                }
+            ],
+            "effects_description": "You are now completely naked. All your clothing forms a 'pile of clothes' object in your current location. You feel exposed and vulnerable, and the cold air of the lodge bites at your skin. Any NPCs present will react strongly to your sudden nudity. Your mental state is altered, potentially leading to new perspectives or vulnerabilities."
+        },
+        {
+            "id": "rule_go_outside_lodge",
+            "verb": "go_outside",
+            "description": "The player attempts to exit the Peak Vista Lodge and step into the cold mountain air.",
+            "preconditions": [
+                {
+                    "description": "You must be in the Peak Vista Lodge Lobby to go outside.",
+                    "type": "player_location",
+                    "value": "peak_vista_lodge_lobby"
+                }
+            ],
+            "effects_description": "You move from the Peak Vista Lodge Lobby to the 'Outside the Lodge' location. The biting cold immediately assaults you, and you are now exposed to the harsh elements of the blizzard. You feel a sudden chill and a sense of vulnerability."
+        },
+        {
+            "id": "rule_bury_self_in_snow",
+            "verb": "bury_self_in_snow",
+            "description": "The player attempts to bury themselves in a mound of snow, seeking either shelter, concealment, or an extreme sensation.",
+            "preconditions": [
+                {
+                    "description": "You must be outside in a snowy environment to bury yourself in snow.",
+                    "type": "player_location",
+                    "value": "outside_the_lodge"
+                }
+            ],
+            "effects_description": "You plunge into the deep snow, pulling drifts over yourself until you are mostly submerged. The immediate effect is an intense, biting cold that permeates your clothes and skin. You are now hidden from immediate view, but the extreme temperature could quickly lead to hypothermia if you remain buried for too long. Your visibility to others is drastically reduced."
+        },
+        {
+            "id": "rule_do_pushups",
+            "verb": "do_pushups",
+            "description": "The player performs a series of push-ups with the intention of improving their physical strength and endurance.",
+            "preconditions": [
+                {
+                    "description": "You must be in a location with enough space to perform physical exercises.",
+                    "type": "player_location",
+                    "value": "peak_vista_lodge_lobby"
+                },
+                {
+                    "description": "You must not be completely naked to perform push-ups comfortably in public.",
+                    "type": "object_state",
+                    "value": "player_is_wearing_clothes:true"
+                }
+            ],
+            "effects_description": "You feel a burn in your muscles and a slight improvement in your physical abilities. You are now slightly fatigued, and any NPCs present may have noticed your sudden burst of exercise."
+        },
+        {
+            "id": "rule_ask_ladies_if_ok",
+            "verb": "ask",
+            "description": "The player addresses a group of distressed women in the lobby, asking if they are alright, showing concern for their well-being amidst the blizzard.",
+            "preconditions": [
+                {
+                    "description": "A group of distressed women (the 'distressed_ladies') must be present in your current location.",
+                    "type": "npc_present",
+                    "value": "distressed_ladies"
+                },
+                {
+                    "description": "You must be in the Peak Vista Lodge Lobby.",
+                    "type": "player_location",
+                    "value": "peak_vista_lodge_lobby"
+                }
+            ],
+            "effects_description": "The distressed women acknowledge your presence, some looking up with weary eyes, others perhaps offering a brief, hushed response. Their reaction will depend on their current state of mind and the context of the situation, potentially opening a dialogue or revealing new information about their predicament."
+        },
+        {
+            "id": "rule_flex_for_elera",
+            "verb": "flex_for_elera",
+            "description": "The player flexes their newly pumped muscles for Elera and asks her to feel them, hoping to impress her with their physical prowess.",
+            "preconditions": [
+                {
+                    "description": "Elera must be present in your current location.",
+                    "type": "npc_present",
+                    "value": "elera"
+                },
+                {
+                    "description": "You must have recently performed strenuous exercise, resulting in pumped muscles.",
+                    "type": "object_state",
+                    "value": "player_has_pumped_muscles:true"
+                },
+                {
+                    "description": "You must be in the Peak Vista Lodge Lobby.",
+                    "type": "player_location",
+                    "value": "peak_vista_lodge_lobby"
+                }
+            ],
+            "effects_description": "Elera observes your flexing. Her reaction is a mix of mild amusement and slight awkwardness. She politely declines to feel your muscles, perhaps offering a brief, non-committal compliment on your dedication. This interaction slightly shifts her disposition towards you, making her more aware of your presence but not necessarily impressed."
+        }
+    ],
+    "completed_plot_points": [],
+    "game_complete": false
 }
