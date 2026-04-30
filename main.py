@@ -1,5 +1,6 @@
 import os
 from src.meta_controller import MetaController
+import src.ui as ui
 from src.config import STATE_DIR
 
 def main():
@@ -19,6 +20,9 @@ def main():
     
     # Run all four steps being the initialization phase,loop phase, fixer phase, and details phase
     controller.run_all()
+    ui.main()
+
+
 
 if __name__ == "__main__":
     main()
