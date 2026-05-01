@@ -1,0 +1,5 @@
+.env
+src/__pycache__
+src/phases/__pycache__
+src/runtime/__pycache__
+
