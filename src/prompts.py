@@ -521,6 +521,7 @@ COMMONSENSE BOUNDS — classify as exceptional if the action involves:
 - Permanent destruction of a protected object/NPC
 
 For "constituent" actions, identify which plot point id is triggered (triggered_plot_point_id).
+For "consistent" actions, identify which existing rule id best matches the action (matched_rule_id); leave empty if none apply.
 Propose the world state changes and a narrative outcome description.
 
 For "exceptional" actions, provide a brief exception_reason explaining why it's blocked (this will be reworded by the drama manager for in-world delivery).
@@ -533,6 +534,7 @@ ACTION_CLASSIFIER_SCHEMA = {
     "properties": {
         "action_type": {"type": "STRING"},
         "triggered_plot_point_id": {"type": "STRING"},
+        "matched_rule_id": {"type": "STRING"},
         "is_commonsense_valid": {"type": "BOOLEAN"},
         "proposed_world_changes": {
             "type": "ARRAY",
@@ -550,8 +552,9 @@ ACTION_CLASSIFIER_SCHEMA = {
         "proposed_outcome_description": {"type": "STRING"},
         "exception_reason": {"type": "STRING"}
     },
-    "required": ["action_type", "triggered_plot_point_id", "is_commonsense_valid",
-                 "proposed_world_changes", "proposed_outcome_description", "exception_reason"]
+    "required": ["action_type", "triggered_plot_point_id", "matched_rule_id",
+                 "is_commonsense_valid", "proposed_world_changes",
+                 "proposed_outcome_description", "exception_reason"]
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -574,7 +577,10 @@ Generate a new game rule for this action. The rule must:
 
 If the action requires objects or locations that don't currently exist in the game world, specify them in new_objects_needed or new_locations_needed. These will be added to the world (the player will then need to find/create them — this is the cascading precondition mechanic).
 
-If adding new objects affects how any existing rules work (e.g., a new "heavy ladder" object means "pick up" should check weight), list those existing rules in existing_rules_to_update with a description of the update needed.
+If adding new objects affects how any existing rules work (e.g., a new "heavy ladder" object means "pick up" should check weight), list those existing rules in existing_rules_to_update. For each, provide:
+- update_description: plain-English explanation of why the rule changes
+- updated_preconditions: the complete new preconditions list for that rule (replaces the old one)
+- updated_effects_description: the complete new effects description (replaces the old one)
 
 Precondition types: player_location, has_item, knows_fact, npc_present, object_state
 """
@@ -638,9 +644,23 @@ RULE_GENERATOR_SCHEMA = {
                 "type": "OBJECT",
                 "properties": {
                     "rule_id": {"type": "STRING"},
-                    "update_description": {"type": "STRING"}
+                    "update_description": {"type": "STRING"},
+                    "updated_preconditions": {
+                        "type": "ARRAY",
+                        "items": {
+                            "type": "OBJECT",
+                            "properties": {
+                                "description": {"type": "STRING"},
+                                "type": {"type": "STRING"},
+                                "value": {"type": "STRING"}
+                            },
+                            "required": ["description", "type", "value"]
+                        }
+                    },
+                    "updated_effects_description": {"type": "STRING"}
                 },
-                "required": ["rule_id", "update_description"]
+                "required": ["rule_id", "update_description",
+                             "updated_preconditions", "updated_effects_description"]
             }
         },
         "preconditions_not_met_message": {"type": "STRING"}
@@ -681,12 +701,22 @@ Make one of these decisions:
 
 "plan_repair" — the player found an alternative path to a plot point that wasn't anticipated. Approve the action but patch the plot: mark the relevant plot point as reachable via this new path. Provide story_patch entries.
 
-"generate_content" — the action is valid but requires new world content (the rule generator should have already handled this, but if something is still missing, flag it here).
+"generate_content" — the action is valid but requires world content that doesn't exist yet (rule generator missed it). Provide content_hint: a plain-English description of what object, location, or NPC needs to be created.
 
-"retrofit_rules" — the action reveals that an existing rule needs updating for consistency.
+"retrofit_rules" — the action reveals that one or more existing rules are now inconsistent with new world state. Approve the action, but provide rules_to_retrofit: for each rule, supply the full updated_preconditions list and updated_effects_description that should replace the old ones.
 
 IMPORTANT: Prefer "approve" when possible. Only block when truly necessary to protect story solvability. The player should feel in control. When blocking, the companion message must feel organic, not like a game system rejection.
 """
+
+_PRECONDITION_ITEM = {
+    "type": "OBJECT",
+    "properties": {
+        "description": {"type": "STRING"},
+        "type": {"type": "STRING"},
+        "value": {"type": "STRING"}
+    },
+    "required": ["description", "type", "value"]
+}
 
 DRAMA_MANAGER_SCHEMA = {
     "type": "OBJECT",
@@ -706,7 +736,26 @@ DRAMA_MANAGER_SCHEMA = {
                 },
                 "required": ["action", "plot_point_id", "new_description"]
             }
+        },
+        "content_hint": {"type": "STRING"},
+        "rules_to_retrofit": {
+            "type": "ARRAY",
+            "items": {
+                "type": "OBJECT",
+                "properties": {
+                    "rule_id": {"type": "STRING"},
+                    "update_description": {"type": "STRING"},
+                    "updated_preconditions": {
+                        "type": "ARRAY",
+                        "items": _PRECONDITION_ITEM
+                    },
+                    "updated_effects_description": {"type": "STRING"}
+                },
+                "required": ["rule_id", "update_description",
+                             "updated_preconditions", "updated_effects_description"]
+            }
         }
     },
-    "required": ["decision", "reason", "companion_message", "approved_outcome_description", "story_patch"]
+    "required": ["decision", "reason", "companion_message", "approved_outcome_description",
+                 "story_patch", "content_hint", "rules_to_retrofit"]
 }

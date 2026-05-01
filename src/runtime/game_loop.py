@@ -1,6 +1,8 @@
 from src.runtime.action_classifier import classify_action
 from src.runtime.rule_generator import generate_rule
 from src.runtime.drama_manager import drama_manager_review
+from src.runtime.precondition_checker import check_preconditions
+from src.runtime.validator import validate_changes
 
 MOVEMENT_DIRECTIONS = {
     "north", "south", "east", "west",
@@ -266,7 +268,27 @@ class GameLoop:
 
         rule_updates = rule_result.get("existing_rules_to_update", [])
         if rule_updates:
-            self._emit(f"[Retrofitted {len(rule_updates)} existing rule(s)]", "system")
+            self._retrofit_rules(rule_updates)
+
+    def _retrofit_rules(self, updates: list):
+        """Apply rule updates returned by the rule generator or Drama Manager."""
+        if not updates:
+            return
+        rules = self.state.get("action_rules", [])
+        rule_map = {r["id"]: r for r in rules}
+        applied = 0
+        for upd in updates:
+            rule = rule_map.get(upd.get("rule_id", ""))
+            if not rule:
+                continue
+            if upd.get("updated_preconditions"):
+                rule["preconditions"] = upd["updated_preconditions"]
+            if upd.get("updated_effects_description"):
+                rule["effects_description"] = upd["updated_effects_description"]
+            applied += 1
+            self._emit(f"[Rule updated: '{rule.get('verb', upd['rule_id'])}']", "system")
+        if applied:
+            self.state.update("action_rules", rules)
 
     def _apply_story_patch(self, patches: list):
         plot_points = self.state.get("annotated_plot_points", [])
@@ -372,6 +394,14 @@ class GameLoop:
             context = self._build_context()
             classification = classify_action(player_input, context, self.llm)
 
+        # Precondition check — deterministic, no LLM call
+        action_type = classification.get("action_type", "consistent")
+        if action_type in ("constituent", "consistent"):
+            pc_result = check_preconditions(classification, context)
+            if not pc_result["all_met"]:
+                self._emit(f"\n  {pc_result['unmet_message']}", "system")
+                return
+
         dm_result = drama_manager_review(player_input, classification, context, self.llm)
         decision = dm_result.get("decision", "approve")
 
@@ -380,7 +410,27 @@ class GameLoop:
             self._emit(f"\n  A voice nearby warns you: \"{msg}\"", "warning")
             return
 
-        changes = classification.get("proposed_world_changes", [])
+        # generate_content: world element is missing — run rule generator to fill the gap
+        if decision == "generate_content":
+            hint = dm_result.get("content_hint") or player_input
+            self._emit("  [Generating missing world content...]", "system")
+            rule_result = generate_rule(hint, context, self.llm)
+            self._apply_rule_result(rule_result)
+            context = self._build_context()
+
+        # retrofit_rules: existing rules are inconsistent with new world state
+        elif decision == "retrofit_rules":
+            self._retrofit_rules(dm_result.get("rules_to_retrofit", []))
+
+        # plan_repair is handled after changes are applied (below)
+
+        # Validate proposed changes — strips impossible ones before applying
+        raw_changes = classification.get("proposed_world_changes", [])
+        val_result = validate_changes(raw_changes, self.state)
+        for r in val_result["rejected"]:
+            self._emit(f"  [Skipped: {r['reason']}]", "system")
+        changes = val_result["valid_changes"]
+
         self._apply_world_changes(changes)
 
         if decision == "plan_repair":
