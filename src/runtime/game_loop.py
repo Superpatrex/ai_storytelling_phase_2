@@ -10,11 +10,18 @@ MOVEMENT_DIRECTIONS = {
 
 
 class GameLoop:
-    def __init__(self, controller):
+    def __init__(self, controller, output_callback=None):
         self.controller = controller
         self.llm = controller.llm
         self.state = controller.state
+        self.output_callback = output_callback
         self._init_player_state()
+
+    def _emit(self, text: str, category: str = "narrative"):
+        if self.output_callback:
+            self.output_callback({"type": "game_output", "text": text, "category": category})
+        else:
+            print(text)
 
     # ── Initialization ─────────────────────────────────────────────────────
 
@@ -69,30 +76,38 @@ class GameLoop:
     def display_location(self):
         room = self._current_room()
         if not room:
-            print("ERROR: You are in an unknown location.")
+            self._emit("ERROR: You are in an unknown location.", "error")
             return
 
-        print(f"\n{'═' * 60}")
-        print(f"  {room['name'].upper()}")
-        print(f"{'═' * 60}")
-        print(room["description"])
+        self._emit("", "separator")
+        self._emit(f"  {room['name'].upper()}", "room_name")
+        self._emit(room["description"], "room_desc")
 
         connections = room.get("connections", [])
         if connections:
-            exits = [f"{c['direction']} ({c.get('label', c['to_room_id'])})" for c in connections]
-            print(f"\nExits: {', '.join(exits)}")
+            exits = [f"{c['direction']} → {c.get('label', c['to_room_id'])}" for c in connections]
+            self._emit(f"Exits: {', '.join(exits)}", "exits")
 
         room_objects = self._objects_in_room(room["id"])
         if room_objects:
-            print(f"You see: {', '.join(o['name'] for o in room_objects)}")
+            self._emit(f"You see: {', '.join(o['name'] for o in room_objects)}", "objects_present")
 
         room_npcs = self._npcs_in_room(room["id"])
         if room_npcs:
-            print(f"People here: {', '.join(n['name'] for n in room_npcs)}")
+            self._emit(f"People here: {', '.join(n['name'] for n in room_npcs)}", "npcs_present")
 
         inventory = self.state.get("player_state", {}).get("inventory", [])
         if inventory:
-            print(f"Carrying: {', '.join(inventory)}")
+            self._emit(f"Carrying: {', '.join(inventory)}", "inventory_line")
+
+        if self.output_callback:
+            self.output_callback({
+                "type": "game_location",
+                "room": room,
+                "objects": room_objects,
+                "npcs": room_npcs,
+                "inventory": inventory,
+            })
 
     # ── Movement (fast path, no LLM) ────────────────────────────────────────
 
@@ -105,9 +120,9 @@ class GameLoop:
                 player_state = self.state.get("player_state", {})
                 player_state["current_location_id"] = conn["to_room_id"]
                 self.state.update("player_state", player_state)
-                print(f"You head {direction}.")
+                self._emit(f"You head {direction}.", "system")
                 return True
-        print(f"You can't go {direction} from here.")
+        self._emit(f"You can't go {direction} from here.", "system")
         return False
 
     def _parse_movement(self, text: str) -> str | None:
@@ -200,7 +215,7 @@ class GameLoop:
             if not any(r["id"] == new_rule["id"] for r in rules):
                 rules.append(new_rule)
                 self.state.update("action_rules", rules)
-                print(f"     [New rule created: '{new_rule['verb']}']")
+                self._emit(f"[New rule created: '{new_rule['verb']}']", "system")
 
         new_objects = rule_result.get("new_objects_needed", [])
         if new_objects:
@@ -214,8 +229,7 @@ class GameLoop:
                     obj.setdefault("is_protected", False)
                     obj.setdefault("linked_plot_point_id", "")
                     objects.append(obj)
-                    print(f"     [New object added to world: '{obj['name']}' in {obj.get('suggested_location_id', '?')}]")
-                    # Rename suggested_location_id → location_id for consistency
+                    self._emit(f"[New object added: '{obj['name']}' in {obj.get('suggested_location_id', '?')}]", "system")
                     obj["location_id"] = obj.pop("suggested_location_id", "")
             self.state.update("objects", objects)
 
@@ -238,9 +252,8 @@ class GameLoop:
                         "story_event_ids": []
                     }
                     rooms.append(new_room)
-                    print(f"     [New location added: '{loc['name']}']")
+                    self._emit(f"[New location added: '{loc['name']}']", "system")
 
-                    # Add reverse connection from the existing room
                     origin = room_map.get(loc["connect_to_room_id"])
                     if origin:
                         origin["connections"].append({
@@ -253,7 +266,7 @@ class GameLoop:
 
         rule_updates = rule_result.get("existing_rules_to_update", [])
         if rule_updates:
-            print(f"     [Retrofitted {len(rule_updates)} existing rule(s)]")
+            self._emit(f"[Retrofitted {len(rule_updates)} existing rule(s)]", "system")
 
     def _apply_story_patch(self, patches: list):
         plot_points = self.state.get("annotated_plot_points", [])
@@ -273,9 +286,7 @@ class GameLoop:
     # ── Win condition ────────────────────────────────────────────────────────
 
     def _check_win(self, changes: list) -> bool:
-        completed = self.state.get("completed_plot_points", [])
         plot_points = self.state.get("annotated_plot_points", [])
-
         for change in changes:
             if change.get("type") == "complete_plot_point":
                 pp_id = change.get("target_id", "")
@@ -286,13 +297,13 @@ class GameLoop:
 
     def _show_win(self):
         hidden_truth = self.state.get("hidden_truth", {})
-        print(f"\n{'═' * 60}")
-        print("  MYSTERY SOLVED!")
-        print(f"{'═' * 60}")
-        print(f"The culprit was: {hidden_truth.get('culprit_name', 'Unknown')}")
-        print(f"Motive:          {hidden_truth.get('motive', 'Unknown')}")
-        print(f"Method:          {hidden_truth.get('method', 'Unknown')}")
-        print(f"\n{hidden_truth.get('hidden_truth_summary', '')}")
+        self._emit(f"\n{'═' * 50}", "win")
+        self._emit("  MYSTERY SOLVED!", "win")
+        self._emit(f"{'═' * 50}", "win")
+        self._emit(f"The culprit was: {hidden_truth.get('culprit_name', 'Unknown')}", "win")
+        self._emit(f"Motive:          {hidden_truth.get('motive', 'Unknown')}", "win")
+        self._emit(f"Method:          {hidden_truth.get('method', 'Unknown')}", "win")
+        self._emit(f"\n{hidden_truth.get('hidden_truth_summary', '')}", "win")
         self.state.update("game_complete", True)
 
     # ── Context builder ──────────────────────────────────────────────────────
@@ -319,34 +330,28 @@ class GameLoop:
     # ── Main action pipeline ─────────────────────────────────────────────────
 
     def process_action(self, player_input: str):
-        # Fast-path: movement
         direction = self._parse_movement(player_input)
         if direction:
             self._try_move(direction)
             return
 
-        print("\n  [Thinking...]")
+        self._emit("\n  [Thinking...]", "system")
         context = self._build_context()
 
-        # Step 1: Classify
         classification = classify_action(player_input, context, self.llm)
         action_type = classification.get("action_type", "consistent")
 
-        # Step 2: Handle exceptional actions immediately (DM blocks)
         if action_type == "exceptional":
             reason = classification.get("exception_reason", "You shouldn't do that here.")
-            # Deliver block in-world via drama manager
             dm_result = drama_manager_review(player_input, classification, context, self.llm)
             msg = dm_result.get("companion_message") or reason
-            print(f"\n  A voice nearby warns you: \"{msg}\"")
+            self._emit(f"\n  A voice nearby warns you: \"{msg}\"", "warning")
             return
 
-        # Step 3: Generate rule for unknown actions
         if action_type == "new_rule_needed":
-            print("  [Working out how to do that...]")
+            self._emit("  [Working out how to do that...]", "system")
             rule_result = generate_rule(player_input, context, self.llm)
 
-            # Check if preconditions for the new rule aren't met
             unmet_msg = rule_result.get("preconditions_not_met_message", "")
             new_objs = rule_result.get("new_objects_needed", [])
             new_locs = rule_result.get("new_locations_needed", [])
@@ -355,29 +360,26 @@ class GameLoop:
 
             if new_objs or new_locs:
                 items = [o["name"] for o in new_objs] + [l["name"] for l in new_locs]
-                print(f"\n  To do that, you'd need: {', '.join(items)}.")
+                self._emit(f"\n  To do that, you'd need: {', '.join(items)}.", "system")
                 if unmet_msg:
-                    print(f"  {unmet_msg}")
+                    self._emit(f"  {unmet_msg}", "system")
                 return
 
             if unmet_msg:
-                print(f"\n  {unmet_msg}")
+                self._emit(f"\n  {unmet_msg}", "system")
                 return
 
-            # Re-classify now that the rule exists
             context = self._build_context()
             classification = classify_action(player_input, context, self.llm)
 
-        # Step 4: Drama Manager review
         dm_result = drama_manager_review(player_input, classification, context, self.llm)
         decision = dm_result.get("decision", "approve")
 
         if decision == "block":
             msg = dm_result.get("companion_message", "You feel something stopping you.")
-            print(f"\n  A voice nearby warns you: \"{msg}\"")
+            self._emit(f"\n  A voice nearby warns you: \"{msg}\"", "warning")
             return
 
-        # Step 5: Apply changes and show outcome
         changes = classification.get("proposed_world_changes", [])
         self._apply_world_changes(changes)
 
@@ -387,27 +389,26 @@ class GameLoop:
         outcome = (dm_result.get("approved_outcome_description")
                    or classification.get("proposed_outcome_description")
                    or "Nothing seems to happen.")
-        print(f"\n  {outcome}")
+        self._emit(f"\n  {outcome}", "narrative")
 
-        # Step 6: Check win
         if self._check_win(changes):
             self._show_win()
 
         self.state.save()
 
-    # ── Main loop ────────────────────────────────────────────────────────────
+    # ── Main loop (CLI only) ─────────────────────────────────────────────────
 
     def run(self):
         protagonist = self.state.get("protagonist", {})
         goal = self.state.get("goal", "Solve the crime")
 
-        print(f"\n{'═' * 60}")
-        print(f"  INTERACTIVE MYSTERY")
-        print(f"{'═' * 60}")
-        print(f"You are {protagonist.get('Name', 'The Detective')}.")
-        print(f"Your goal: {goal}")
-        print(f"\nType actions in plain English (aim for ~5 words).")
-        print(f"Commands: look | inventory | help | quit")
+        self._emit(f"\n{'═' * 50}", "system")
+        self._emit(f"  INTERACTIVE MYSTERY", "system")
+        self._emit(f"{'═' * 50}", "system")
+        self._emit(f"You are {protagonist.get('Name', 'The Detective')}.", "system")
+        self._emit(f"Your goal: {goal}", "system")
+        self._emit(f"\nType actions in plain English (aim for ~5 words).", "system")
+        self._emit(f"Commands: look | inventory | help | quit", "system")
 
         self.display_location()
 
@@ -415,7 +416,7 @@ class GameLoop:
             try:
                 raw = input("\n> ").strip()
             except (EOFError, KeyboardInterrupt):
-                print("\nGame saved. Goodbye!")
+                self._emit("\nGame saved. Goodbye!", "system")
                 break
 
             if not raw:
@@ -424,19 +425,19 @@ class GameLoop:
             cmd = raw.lower()
 
             if cmd == "quit":
-                print("Game saved. Goodbye!")
+                self._emit("Game saved. Goodbye!", "system")
                 break
             elif cmd in ("look", "l"):
                 self.display_location()
             elif cmd in ("inventory", "i", "inv"):
                 inv = self.state.get("player_state", {}).get("inventory", [])
-                print(f"Carrying: {', '.join(inv)}" if inv else "You are carrying nothing.")
+                self._emit(f"Carrying: {', '.join(inv)}" if inv else "You are carrying nothing.", "system")
             elif cmd == "help":
-                print("Actions: look, inventory, go [direction], or describe any action.")
-                print("Exits are shown after your location name.")
+                self._emit("Actions: look, inventory, go [direction], or describe any action.", "system")
+                self._emit("Exits are shown after your location name.", "system")
             else:
                 self.process_action(raw)
                 self.display_location()
 
         if self.state.get("game_complete"):
-            print("\nThank you for playing!")
+            self._emit("\nThank you for playing!", "system")

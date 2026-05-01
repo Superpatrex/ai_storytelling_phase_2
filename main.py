@@ -1,6 +1,5 @@
 import os
 from src.meta_controller import MetaController
-import src.ui as ui
 from src.config import STATE_DIR
 
 
