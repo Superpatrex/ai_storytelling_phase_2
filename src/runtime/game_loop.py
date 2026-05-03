@@ -71,12 +71,33 @@ class GameLoop:
         ]
 
     def _npcs_in_room(self, room_id: str) -> list:
+        # Exclude the protagonist — the player IS that character, so listing them
+        # as a room occupant is confusing and incorrect.
+        protagonist_name = self.state.get("protagonist", {}).get("Name", "").lower()
         return [
             n for n in self.state.get("npcs", [])
             if n.get("current_location_id") == room_id
+            and n.get("name", "").lower() != protagonist_name
         ]
 
     # ── Display ─────────────────────────────────────────────────────────────
+
+    def display_characters(self):
+        npcs = self.state.get("npcs", [])
+        if not npcs:
+            self._emit("No characters found.", "system")
+            return
+
+        # Build a room id → name lookup for readable location labels
+        rooms = {r["id"]: r["name"] for r in self.state.get("world_graph", {}).get("rooms", [])}
+        player_loc = self.state.get("player_state", {}).get("current_location_id", "")
+
+        self._emit("Characters:", "system")
+        for npc in npcs:
+            loc_id = npc.get("current_location_id", "")
+            loc_name = rooms.get(loc_id, "Unknown location")
+            here = "  ← here" if loc_id == player_loc else ""
+            self._emit(f"  {npc['name']}  —  {loc_name}{here}", "system")
 
     def display_location(self):
         room = self._current_room()
@@ -130,15 +151,52 @@ class GameLoop:
         self._emit(f"You can't go {direction} from here.", "system")
         return False
 
-    # Method to parse a movement command and return the direction string, or None if not a movement command
+    # Method to parse a bare cardinal direction command ("north", "go east", etc.)
     def _parse_movement(self, text: str) -> str | None:
-        text = text.lower().strip()
-        if text in MOVEMENT_DIRECTIONS:
-            return text
+        t = text.lower().strip()
+        if t in MOVEMENT_DIRECTIONS:
+            return t
         for d in MOVEMENT_DIRECTIONS:
-            if text == f"go {d}" or text == f"move {d}" or text == f"walk {d}":
+            if t in (f"go {d}", f"move {d}", f"walk {d}", f"head {d}"):
                 return d
         return None
+
+    # Method to use the LLM to detect whether the player wants to navigate to a room
+    def _detect_navigation_intent(self, player_input: str) -> str | None:
+        from src.prompts import NAVIGATION_INTENT_PROMPT, NAVIGATION_INTENT_SCHEMA
+        all_rooms = self.state.get("world_graph", {}).get("rooms", [])
+        room_list = "\n".join(f"- {r['name']}" for r in all_rooms)
+        prompt = NAVIGATION_INTENT_PROMPT.format(
+            player_input=player_input,
+            room_list=room_list,
+        )
+        result = self.llm.generate_json(prompt=prompt, schema=NAVIGATION_INTENT_SCHEMA)
+        if result and result.get("is_navigation"):
+            return result.get("destination", "") or None
+        return None
+
+    # Method to move the player directly to any named room in the world graph
+    def _try_navigate_to(self, destination: str) -> bool:
+        all_rooms = self.state.get("world_graph", {}).get("rooms", [])
+        dest = destination.lower().strip()
+        target = next(
+            (r for r in all_rooms
+             if dest in r["id"].lower()
+             or dest in r.get("name", "").lower()
+             or r.get("name", "").lower() in dest),
+            None
+        )
+        if not target:
+            return False
+        current = self._current_room()
+        if current and current["id"] == target["id"]:
+            self._emit("You're already there.", "system")
+            return True
+        player_state = self.state.get("player_state", {})
+        player_state["current_location_id"] = target["id"]
+        self.state.update("player_state", player_state)
+        self._emit(f"You make your way to {target['name']}.", "narrative")
+        return True
 
     # ── World state changes ──────────────────────────────────────────────────
 
@@ -201,9 +259,22 @@ class GameLoop:
                     completed.append(target)
 
             elif ctype == "move_to_room":
+                # target should be a room ID, but the LLM sometimes puts a room name or
+                # character name — fuzzy-match against room IDs and names before giving up.
                 room = self._get_room(target)
+                if not room:
+                    all_rooms = self.state.get("world_graph", {}).get("rooms", [])
+                    target_lower = target.lower()
+                    room = next(
+                        (r for r in all_rooms
+                         if target_lower in r["id"].lower()
+                         or target_lower in r.get("name", "").lower()
+                         or r["id"].lower() in target_lower
+                         or r.get("name", "").lower() in target_lower),
+                        None
+                    )
                 if room:
-                    player_state["current_location_id"] = target
+                    player_state["current_location_id"] = room["id"]
 
         player_state["inventory"] = inventory
         player_state["knowledge"] = knowledge
@@ -243,9 +314,21 @@ class GameLoop:
             world_graph = self.state.get("world_graph", {"rooms": [], "starting_room_id": ""})
             rooms = world_graph["rooms"]
             existing_ids = {r["id"] for r in rooms}
+            existing_names = {r.get("name", "").lower() for r in rooms}
             room_map = {r["id"]: r for r in rooms}
 
             for loc in new_locs:
+                loc_name_lower = loc["name"].lower()
+                # Skip if a room with the same ID or a similar name already exists —
+                # the LLM often invents names like "Lodge Common Area" for the Grand Lobby.
+                already_exists = (
+                    loc["id"] in existing_ids
+                    or loc_name_lower in existing_names
+                    or any(loc_name_lower in n or n in loc_name_lower for n in existing_names)
+                )
+                if already_exists:
+                    print(f"  [Skipped duplicate location: '{loc['name']}']")
+                    continue
                 if loc["id"] not in existing_ids:
                     new_room = {
                         "id": loc["id"],
@@ -355,10 +438,42 @@ class GameLoop:
 
     # ── Main action pipeline ─────────────────────────────────────────────────
 
+    # Helper to detect conversational/question inputs that should never create world content
+    def _is_conversational_input(self, text: str) -> bool:
+        t = text.lower().strip()
+        question_starters = (
+            "do you", "can you", "could you", "would you", "will you",
+            "what ", "where ", "who ", "how ", "why ", "when ",
+            "is there", "are there", "have you", "did you", "does ",
+            "tell me", "what about", "and what", "any idea", "any thoughts",
+        )
+        conversational_verbs = ("ask ", "talk ", "speak ", "chat ", "say ", "greet ", "question ")
+        return (
+            t.endswith("?")
+            or any(t.startswith(s) for s in question_starters)
+            or any(v in t for v in conversational_verbs)
+        )
+
+    # Helper to find an existing talk/ask rule that can handle conversational inputs
+    def _find_existing_talk_rule(self, context: dict) -> dict | None:
+        talk_verbs = {"talk", "ask", "speak", "question", "inquire", "discuss", "greet", "chat"}
+        for rule in context.get("action_rules", []):
+            verb = rule.get("verb", "").lower()
+            if verb in talk_verbs or any(v in verb for v in talk_verbs):
+                return rule
+        return None
+
     def process_action(self, player_input: str):
+        # Fast path: cardinal direction ("north", "go east", etc.)
         direction = self._parse_movement(player_input)
         if direction:
             self._try_move(direction)
+            return
+
+        # LLM navigation check — handles any natural phrasing ("let's head to...",
+        # "Interesting, go to the library", etc.) without brittle keyword matching.
+        destination = self._detect_navigation_intent(player_input)
+        if destination and self._try_navigate_to(destination):
             return
 
         self._emit("\n  [Thinking...]", "system")
@@ -375,32 +490,57 @@ class GameLoop:
             return
 
         if action_type == "new_rule_needed":
-            self._emit("  [Working out how to do that...]", "system")
-            rule_result = generate_rule(player_input, context, self.llm)
+            # Short-circuit for conversational inputs: reuse an existing talk/ask rule
+            # instead of calling the rule generator which would create spurious world content.
+            if self._is_conversational_input(player_input):
+                existing_talk = self._find_existing_talk_rule(context)
+                if existing_talk:
+                    classification = {
+                        "action_type": "consistent",
+                        "matched_rule_id": existing_talk.get("id", ""),
+                        "proposed_outcome_description": "",
+                        "proposed_world_changes": [],
+                    }
+                    action_type = "consistent"
 
-            unmet_msg = rule_result.get("preconditions_not_met_message", "")
-            new_objs = rule_result.get("new_objects_needed", [])
-            new_locs = rule_result.get("new_locations_needed", [])
+            if action_type == "new_rule_needed":
+                self._emit("  [Working out how to do that...]", "system")
+                rule_result = generate_rule(player_input, context, self.llm)
 
-            self._apply_rule_result(rule_result)
+                unmet_msg = rule_result.get("preconditions_not_met_message", "")
+                new_objs = rule_result.get("new_objects_needed", [])
+                new_locs = rule_result.get("new_locations_needed", [])
 
-            if new_objs or new_locs:
-                items = [o["name"] for o in new_objs] + [l["name"] for l in new_locs]
-                self._emit(f"\n  To do that, you'd need: {', '.join(items)}.", "system")
-                if unmet_msg:
-                    self._emit(f"  {unmet_msg}", "system")
-                return
+                self._apply_rule_result(rule_result)
 
-            if unmet_msg:
-                self._emit(f"\n  {unmet_msg}", "system")
-                return
+                if new_objs or new_locs:
+                    # Objects placed in the current room can be used immediately — only block
+                    # when the player must travel elsewhere to acquire them.
+                    current_room = self._current_room()
+                    current_room_id = current_room["id"] if current_room else ""
+                    objs_elsewhere = [o for o in new_objs if o.get("location_id", "") != current_room_id]
 
-            context = self._build_context()
-            classification = classify_action(player_input, context, self.llm)
+                    if objs_elsewhere or new_locs:
+                        items = [o["name"] for o in objs_elsewhere] + [l["name"] for l in new_locs]
+                        self._emit(f"\n  To do that, you'd need: {', '.join(items)}.", "system")
+                        if unmet_msg:
+                            self._emit(f"  {unmet_msg}", "system")
+                        return
+                    # All new objects are here — fall through and re-classify now they exist
 
-        # Precondition check — deterministic, no LLM call
+                # Do NOT use unmet_msg when no world content is missing — the LLM often
+                # hallucinate this message even when the NPC/location IS present. Let the
+                # deterministic precondition checker below do the actual check instead.
+
+                context = self._build_context()
+                classification = classify_action(player_input, context, self.llm)
+
+        # Precondition check — deterministic, no LLM call.
+        # Only run for constituent actions (plot point triggers) whose preconditions are
+        # well-structured. For consistent (rule-matched) actions the LLM-generated
+        # precondition values are too unreliable; the Drama Manager handles gating instead.
         action_type = classification.get("action_type", "consistent")
-        if action_type in ("constituent", "consistent"):
+        if action_type == "constituent":
             pc_result = check_preconditions(classification, context)
             if not pc_result["all_met"]:
                 self._emit(f"\n  {pc_result['unmet_message']}", "system")
@@ -432,7 +572,7 @@ class GameLoop:
         raw_changes = classification.get("proposed_world_changes", [])
         val_result = validate_changes(raw_changes, self.state)
         for r in val_result["rejected"]:
-            self._emit(f"  [Skipped: {r['reason']}]", "system")
+            print(f"  [Validator skip: {r['reason']}]")
         changes = val_result["valid_changes"]
 
         self._apply_world_changes(changes)
@@ -462,7 +602,7 @@ class GameLoop:
         self._emit(f"You are {protagonist.get('Name', 'The Detective')}.", "system")
         self._emit(f"Your goal: {goal}", "system")
         self._emit(f"\nType actions in plain English (aim for ~5 words).", "system")
-        self._emit(f"Commands: look | inventory | help | quit", "system")
+        self._emit(f"Commands: look | inventory | characters | help | quit", "system")
 
         self.display_location()
 
@@ -486,8 +626,10 @@ class GameLoop:
             elif cmd in ("inventory", "i", "inv"):
                 inv = self.state.get("player_state", {}).get("inventory", [])
                 self._emit(f"Carrying: {', '.join(inv)}" if inv else "You are carrying nothing.", "system")
+            elif cmd in ("characters", "chars", "who"):
+                self.display_characters()
             elif cmd == "help":
-                self._emit("Actions: look, inventory, go [direction], or describe any action.", "system")
+                self._emit("Actions: look, inventory, characters, go [direction], or describe any action.", "system")
                 self._emit("Exits are shown after your location name.", "system")
             else:
                 self.process_action(raw)

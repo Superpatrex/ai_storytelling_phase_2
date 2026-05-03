@@ -28,10 +28,9 @@ function mkLine(text: string, category: Category): Line {
   return { id: lineId++, text, category };
 }
 
-// Categories that belong in the story panel (narrative-relevant content only)
+// Categories that belong in the story panel — pure narrative only, no location/world-state lines
 const STORY_CATS = new Set<Category>([
   "narrative", "warning", "win", "player",
-  "room_name", "room_desc", "exits", "objects_present", "npcs_present", "inventory_line",
 ]);
 
 // Categories that are used for spacing/structure but should not appear as visible lines
@@ -69,29 +68,17 @@ function categoryStyle(cat: Category): React.CSSProperties {
   }
 }
 
-// Returns inline styles for a line in the story panel, which uses slightly different sizing than the terminal
+// Returns inline styles for a line in the story panel
 function storyLineStyle(line: Line): React.CSSProperties {
   switch (line.category) {
     case "player":
-      return { color: "var(--player)", fontWeight: 500, marginTop: "1.2rem" };
-    case "room_name":
-      return { color: "var(--room-name)", fontWeight: 500, letterSpacing: "0.04em", marginTop: "1.6rem", marginBottom: "0.4rem" };
-    case "room_desc":
-      return { color: "var(--text)", lineHeight: "1.75" };
-    case "exits":
-      return { color: "var(--exits)", fontSize: "12px", marginTop: "0.4rem" };
-    case "objects_present":
-      return { color: "var(--items)", fontSize: "12px" };
-    case "npcs_present":
-      return { color: "var(--people)", fontSize: "12px" };
-    case "inventory_line":
-      return { color: "var(--carrying)", fontSize: "12px" };
+      return { color: "var(--player)", fontWeight: 500, marginTop: "1.4rem" };
     case "warning":
-      return { color: "var(--warning)", fontStyle: "italic" };
+      return { color: "var(--warning)", fontStyle: "italic", marginTop: "0.6rem" };
     case "win":
       return { color: "var(--win)", fontWeight: 500, marginTop: "1rem" };
     default:
-      return { color: "var(--text)", lineHeight: "1.75" };
+      return { color: "var(--text)", lineHeight: "1.85", marginTop: "0.5rem" };
   }
 }
 

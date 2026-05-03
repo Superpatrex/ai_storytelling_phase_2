@@ -12,10 +12,18 @@ def generate_rule(player_input: str, context: dict, llm, depth: int = 0) -> dict
     setting = context.get("setting") or {}
     setting_str = f"{setting.get('location', 'Unknown')} ({setting.get('time', 'Modern Day')})"
 
+    # Format NPCs and objects visible in the current room so the LLM knows who/what is present
+    room_npcs = context.get("room_npcs") or []
+    room_objects = context.get("room_objects") or []
+    npc_names = ", ".join(n["name"] for n in room_npcs) or "no one"
+    obj_names = ", ".join(o["name"] for o in room_objects if not o.get("in_inventory")) or "nothing"
+
     # Create the rule generator prompt with the current game context
     prompt = RULE_GENERATOR_PROMPT.format(
         player_input=player_input,
         current_room_name=current_room.get("name", "Unknown"),
+        room_npcs=npc_names,
+        room_objects=obj_names,
         inventory=", ".join(player_state.get("inventory", [])) or "nothing",
         setting=setting_str,
         action_rules=json.dumps(context.get("action_rules", []), indent=2)

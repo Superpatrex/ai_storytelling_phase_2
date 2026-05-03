@@ -560,6 +560,35 @@ ACTION_CLASSIFIER_SCHEMA = {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# RUNTIME: NAVIGATION INTENT CLASSIFIER
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Prompt to determine whether a player's input is an attempt to navigate to a location
+NAVIGATION_INTENT_PROMPT = """
+You are a text game engine. A player just typed an action.
+
+PLAYER INPUT: "{player_input}"
+
+ROOMS IN THIS GAME WORLD:
+{room_list}
+
+Decide: is the player trying to move to one of the rooms listed above?
+- Set is_navigation to true only if the player clearly intends to travel to a named location
+- If navigating, set destination to the exact room name from the list
+- Questions about a room ("tell me about the library"), or actions in a room, are NOT navigation
+- If ambiguous, prefer false
+"""
+
+NAVIGATION_INTENT_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {
+        "is_navigation": {"type": "BOOLEAN"},
+        "destination": {"type": "STRING"}
+    },
+    "required": ["is_navigation", "destination"]
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
 # RUNTIME: RULE GENERATOR
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -568,6 +597,8 @@ You are the rule engine for a mystery text game. The player wants to perform an 
 
 PLAYER INPUT: "{player_input}"
 CURRENT LOCATION: {current_room_name}
+PEOPLE HERE: {room_npcs}
+OBJECTS HERE: {room_objects}
 PLAYER INVENTORY: {inventory}
 SETTING: {setting}
 EXISTING RULES: {action_rules}
@@ -576,6 +607,8 @@ Generate a new game rule for this action. The rule must:
 1. Be commonsense-valid within the setting
 2. Have clear preconditions the player must meet
 3. Describe what effects the action has on the world
+
+IMPORTANT: If the player input is a question, a conversational follow-up, or is directed at talking to an NPC (e.g. "Do you know where...", "Can you tell me...", "Ask X about...", "What about..."), do NOT add anything to new_objects_needed or new_locations_needed. Questions and conversation require no physical items or new locations.
 
 If the action requires objects or locations that don't currently exist in the game world, specify them in new_objects_needed or new_locations_needed. These will be added to the world (the player will then need to find/create them — this is the cascading precondition mechanic).
 

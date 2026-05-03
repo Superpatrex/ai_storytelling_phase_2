@@ -101,6 +101,20 @@ def _reject_reason(
 
     elif ctype == "move_to_room":
         if target and target not in room_map:
-            return f"room '{target}' does not exist"
+            # LLMs sometimes use a display name or character name instead of the room ID.
+            # Try fuzzy matching against room IDs and names before rejecting.
+            target_lower = target.lower()
+            fuzzy = next(
+                (r for r in room_map.values()
+                 if target_lower in r["id"].lower()
+                 or target_lower in r.get("name", "").lower()
+                 or r["id"].lower() in target_lower
+                 or r.get("name", "").lower() in target_lower),
+                None
+            )
+            if fuzzy:
+                change["target_id"] = fuzzy["id"]
+            else:
+                return f"room '{target}' does not exist"
 
     return None

@@ -219,8 +219,10 @@ async def _handle_action(
                 inv = _game_loop.state.get("player_state", {}).get("inventory", [])
                 text = f"Carrying: {', '.join(inv)}" if inv else "You are carrying nothing."
                 _game_loop._emit(text, "system")
+            elif cmd in ("characters", "chars", "who"):
+                _game_loop.display_characters()
             elif cmd == "help":
-                _game_loop._emit("Commands: look, inventory, go [direction], or describe any action.", "system")
+                _game_loop._emit("Commands: look, inventory, characters, go [direction], or describe any action.", "system")
                 _game_loop._emit("Exits are shown after your location description.", "system")
             else:
                 _game_loop.process_action(player_input)

@@ -12,19 +12,24 @@ def check_preconditions(classification: dict, context: dict) -> dict:
 
     # Get the player's current state for checking preconditions
     player_state = context.get("player_state", {})
-    inventory   = {item.lower() for item in player_state.get("inventory", [])}
-    knowledge   = [k.lower() for k in player_state.get("knowledge", [])]
-    location    = player_state.get("current_location_id", "")
-    room_npcs   = context.get("room_npcs", [])
+    inventory    = {item.lower() for item in player_state.get("inventory", [])}
+    knowledge    = [k.lower() for k in player_state.get("knowledge", [])]
+    location     = player_state.get("current_location_id", "")
+    room_name    = (context.get("current_room") or {}).get("name", "")
+    room_npcs    = context.get("room_npcs", [])
     room_objects = context.get("room_objects", [])
 
     # Check each precondition against the current game state
     met, unmet = [], []
     for pc in preconditions:
-        if _is_satisfied(pc, inventory, knowledge, location, room_npcs, room_objects):
+        satisfied = _is_satisfied(pc, inventory, knowledge, location, room_name, room_npcs, room_objects)
+        if satisfied:
             met.append(pc)
         else:
             unmet.append(pc)
+            print(f"  [PRECOND FAIL] type={pc.get('type')} value={pc.get('value')!r} "
+                  f"location={location!r} room={room_name!r} "
+                  f"npcs={[n.get('name') for n in room_npcs]}")
 
     # Build a readable player-facing message listing which preconditions are unmet
     unmet_message = ""
@@ -68,6 +73,7 @@ def _is_satisfied(
     inventory: set,
     knowledge: list,
     location: str,
+    room_name: str,
     room_npcs: list,
     room_objects: list,
 ) -> bool:
@@ -81,13 +87,33 @@ def _is_satisfied(
         return any(value in k or k in value for k in knowledge)
 
     if ptype == "player_location":
-        return location == pc.get("value", "")
+        # LLMs often use the display name ("Grand Lobby") instead of the room ID ("grand_lobby"),
+        # and sometimes embed it in a sentence ("player must be in the Grand Lobby").
+        # Accept a match against either the ID or the name, in either direction.
+        room_lower = room_name.lower()
+        return (
+            location == pc.get("value", "")
+            or location.lower() == value
+            or room_lower == value
+            or room_lower in value
+            or value in room_lower
+        )
 
     if ptype == "npc_present":
-        return any(
-            value in n.get("id", "").lower() or value in n.get("name", "").lower()
-            for n in room_npcs
-        )
+        # Try specific NPC match first (bidirectional to handle LLM putting full sentences in value).
+        for n in room_npcs:
+            npc_id   = n.get("id",   "").lower()
+            npc_name = n.get("name", "").lower()
+            if (value in npc_id or npc_id in value or
+                    value in npc_name or npc_name in value):
+                return True
+        # If no specific name matched, check whether the value is a generic presence
+        # phrase (e.g. "at least one NPC must be present") and just verify the room
+        # isn't empty.
+        _GENERIC = ("any", "someone", "anyone", "npc", "person", "present", "at least", "one")
+        if room_npcs and any(word in value for word in _GENERIC):
+            return True
+        return False
 
     if ptype == "object_state":
         for obj in room_objects:

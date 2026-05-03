@@ -1983,6 +1983,18 @@
             "visible": true,
             "in_inventory": false,
             "state": {}
+        },
+        {
+            "id": "dr_shaw_shoe",
+            "name": "Dr. Shaw's shoe",
+            "description": "One of Dr. Evelyn Shaw's shoes, bearing a distinct scratch or scuff mark on the side.",
+            "can_be_picked_up": false,
+            "visible": true,
+            "in_inventory": false,
+            "state": {},
+            "is_protected": false,
+            "linked_plot_point_id": "",
+            "location_id": "medical_bay"
         }
     ],
     "npcs": [
@@ -2190,12 +2202,95 @@
         }
     ],
     "player_state": {
-        "current_location_id": "main_lounge",
+        "current_location_id": "medical_bay",
         "inventory": [],
-        "knowledge": [],
+        "knowledge": [
+            "Evasive about Arthur Finch's death",
+            "inaccessible",
+            "suspicious",
+            "more guarded and suspicious",
+            "true",
+            "role_in_tea_delivery_known",
+            "bottle_and_tea_details_revealed",
+            "shaw_bypassed_tea_procedures_known",
+            "residue_discovered",
+            "sample_collected_for_analysis"
+        ],
         "skills": []
     },
-    "action_rules": [],
-    "completed_plot_points": [],
+    "action_rules": [
+        {
+            "id": "talk_to_dr_shaw_about_knowledge",
+            "verb": "talk",
+            "description": "Talk to Dr. Evelyn Shaw about what she knows regarding the situation.",
+            "preconditions": [
+                {
+                    "description": "The player must be in the Medical Bay.",
+                    "type": "player_location",
+                    "value": "medical_bay"
+                },
+                {
+                    "description": "Dr. Evelyn Shaw must be present.",
+                    "type": "npc_present",
+                    "value": "dr_evelyn_shaw"
+                }
+            ],
+            "effects_description": "Dr. Evelyn Shaw will reveal some crucial information about the events at Peak Vista Lodge, potentially providing a new lead or a new fact to the player."
+        },
+        {
+            "id": "examine_dr_shaw_shoe",
+            "verb": "examine",
+            "description": "Examine Dr. Evelyn Shaw's shoe for a scratch or other signs of a struggle.",
+            "preconditions": [
+                {
+                    "description": "The player must be in the Medical Bay.",
+                    "type": "player_location",
+                    "value": "medical_bay"
+                },
+                {
+                    "description": "Dr. Evelyn Shaw must be present in the Medical Bay.",
+                    "type": "npc_present",
+                    "value": "dr_evelyn_shaw"
+                },
+                {
+                    "description": "Dr. Shaw's shoe must be accessible for examination.",
+                    "type": "object_state",
+                    "value": "dr_shaw_shoe_present"
+                }
+            ],
+            "effects_description": "The player closely examines Dr. Evelyn Shaw's shoe and confirms the presence of a distinct scuff mark or damage, suggesting it was involved in a struggle or altercation. This reveals the fact 'dr_shaw_shoe_scratched'."
+        },
+        {
+            "id": "examine_bottle_and_tea",
+            "verb": "examine",
+            "description": "Examine the empty herbal supplement bottle and Arthur Finch's Herbal Tea.",
+            "preconditions": [
+                {
+                    "description": "The player must be in the Lodge Kitchen and Room Service Prep Area.",
+                    "type": "player_location",
+                    "value": "lodge_kitchen_and_room_service_prep_area"
+                },
+                {
+                    "description": "The Empty Herbal Supplement Bottle must be present in the current location.",
+                    "type": "object_state",
+                    "value": "empty_herbal_supplement_bottle_present"
+                },
+                {
+                    "description": "Arthur Finch's Herbal Tea must be present in the current location.",
+                    "type": "object_state",
+                    "value": "arthur_finch_herbal_tea_present"
+                }
+            ],
+            "effects_description": "The player closely examines the Empty Herbal Supplement Bottle and Arthur Finch's Herbal Tea. This reveals details about their labels, ingredients, and potential connections, leading to the fact 'bottle_and_tea_details_revealed'."
+        }
+    ],
+    "completed_plot_points": [
+        "pp_001",
+        "pp_002",
+        "pp_003",
+        "pp_004",
+        "pp_005",
+        "pp_015"
+    ],
     "game_complete": false
 }
