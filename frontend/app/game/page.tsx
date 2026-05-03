@@ -10,29 +10,34 @@ import {
 import { useRouter } from "next/navigation";
 import { WS_URL, type ServerMessage } from "@/lib/ws";
 
+// All possible output categories that the server or client can assign to a line of text
 type Category =
   | "narrative" | "system" | "location" | "warning" | "win" | "error" | "player"
   | "room_name" | "room_desc" | "exits" | "objects_present" | "npcs_present" | "inventory_line" | "separator";
 
+// A single line of text in the terminal output, tagged with a category for styling
 interface Line {
   id: number;
   text: string;
   category: Category;
 }
 
+// Monotonically increasing ID so React can key list items without using array index
 let lineId = 0;
 function mkLine(text: string, category: Category): Line {
   return { id: lineId++, text, category };
 }
 
-// Categories that belong in the story panel
+// Categories that belong in the story panel (narrative-relevant content only)
 const STORY_CATS = new Set<Category>([
   "narrative", "warning", "win", "player",
   "room_name", "room_desc", "exits", "objects_present", "npcs_present", "inventory_line",
 ]);
 
+// Categories that are used for spacing/structure but should not appear as visible lines
 const HIDDEN_CATS = new Set<Category>(["separator"]);
 
+// Returns inline styles for a line in the terminal output based on its category
 function categoryStyle(cat: Category): React.CSSProperties {
   switch (cat) {
     case "player":
@@ -64,6 +69,7 @@ function categoryStyle(cat: Category): React.CSSProperties {
   }
 }
 
+// Returns inline styles for a line in the story panel, which uses slightly different sizing than the terminal
 function storyLineStyle(line: Line): React.CSSProperties {
   switch (line.category) {
     case "player":
@@ -89,6 +95,7 @@ function storyLineStyle(line: Line): React.CSSProperties {
   }
 }
 
+// Main game page — manages the WebSocket connection, terminal output, and player input
 export default function GamePage() {
   const router = useRouter();
   const ws = useRef<WebSocket | null>(null);
@@ -96,6 +103,7 @@ export default function GamePage() {
   const storyBottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Terminal lines (all output) and story lines (narrative-only subset for the story panel)
   const [lines, setLines] = useState<Line[]>([]);
   const [storyLines, setStoryLines] = useState<Line[]>([]);
   const [showStory, setShowStory] = useState(false);
@@ -105,9 +113,11 @@ export default function GamePage() {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
   const [protagonist, setProtagonist] = useState("");
+  // Input history for ArrowUp/ArrowDown navigation, capped at 50 entries
   const [history, setHistory] = useState<string[]>([]);
   const [, setHistoryIdx] = useState(-1);
 
+  // Appends a line to the terminal and, if it's narrative content, to the story panel as well
   const push = useCallback((text: string, category: Category) => {
     const line = mkLine(text, category);
     if (!HIDDEN_CATS.has(category)) {
@@ -118,16 +128,19 @@ export default function GamePage() {
     }
   }, []);
 
+  // Auto-scroll the terminal to the bottom whenever new lines are added
   useEffect(() => {
     terminalBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [lines]);
 
+  // Auto-scroll the story panel to the bottom when it is open and new story lines arrive
   useEffect(() => {
     if (showStory) {
       storyBottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [storyLines, showStory]);
 
+  // Open the WebSocket on mount, start the game session, and handle all incoming server messages
   useEffect(() => {
     const socket = new WebSocket(WS_URL);
     ws.current = socket;
@@ -141,6 +154,7 @@ export default function GamePage() {
     socket.onmessage = (e) => {
       const msg: ServerMessage = JSON.parse(e.data);
 
+      // Display the protagonist and goal at game start
       if (msg.type === "game_start") {
         setProtagonist(msg.protagonist);
         setGameStarted(true);
@@ -152,6 +166,7 @@ export default function GamePage() {
           push(msg.text, msg.category as Category);
         }
       } else if (msg.type === "action_complete") {
+        // Re-enable the input and check if the mystery has been solved
         setBusy(false);
         if (msg.game_complete) setGameComplete(true);
         setTimeout(() => inputRef.current?.focus(), 50);
@@ -170,6 +185,7 @@ export default function GamePage() {
     return () => socket.close();
   }, [push]);
 
+  // Sends a player action over the WebSocket and echoes it to the terminal
   const sendAction = useCallback(
     (raw: string) => {
       const trimmed = raw.trim();
@@ -178,6 +194,7 @@ export default function GamePage() {
       push(`> ${trimmed}`, "player");
       push("", "system");
 
+      // Prepend to history and reset the history cursor
       setHistory((h) => [trimmed, ...h.slice(0, 49)]);
       setHistoryIdx(-1);
       setInput("");
@@ -188,6 +205,7 @@ export default function GamePage() {
     [busy, connected, push]
   );
 
+  // Handles Enter to submit and ArrowUp/Down to navigate input history
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {

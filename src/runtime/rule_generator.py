@@ -4,19 +4,15 @@ from src.prompts import RULE_GENERATOR_PROMPT, RULE_GENERATOR_SCHEMA
 MAX_RULE_DEPTH = 2  # Maximum recursive depth for cascading new content
 
 
+# Function to generate a new action rule for an unknown player action
 def generate_rule(player_input: str, context: dict, llm, depth: int = 0) -> dict:
-    """
-    Generates a new action rule for an unknown player action.
-    May recursively generate rules for sub-actions if new objects/locations are needed.
-
-    Returns: {new_rule, new_objects_needed, new_locations_needed,
-              existing_rules_to_update, preconditions_not_met_message}
-    """
+    # Get the current room, player state, and setting for the prompt context
     current_room = context.get("current_room") or {}
     player_state = context.get("player_state") or {}
     setting = context.get("setting") or {}
     setting_str = f"{setting.get('location', 'Unknown')} ({setting.get('time', 'Modern Day')})"
 
+    # Create the rule generator prompt with the current game context
     prompt = RULE_GENERATOR_PROMPT.format(
         player_input=player_input,
         current_room_name=current_room.get("name", "Unknown"),
@@ -25,8 +21,10 @@ def generate_rule(player_input: str, context: dict, llm, depth: int = 0) -> dict
         action_rules=json.dumps(context.get("action_rules", []), indent=2)
     )
 
+    # Generate the new rule with the LLM
     result = llm.generate_json(prompt=prompt, schema=RULE_GENERATOR_SCHEMA)
 
+    # Return a default result if the LLM call fails
     if not result:
         return {
             "new_rule": None,

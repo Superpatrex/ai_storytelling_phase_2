@@ -1,6 +1,8 @@
+// Backend WebSocket and REST API URLs
 export const WS_URL = "ws://localhost:8000/ws";
 export const API_URL = "http://localhost:8000";
 
+// Union type for all messages the server can send over the WebSocket
 export type ServerMessage =
   | { type: "generation_progress"; phase: string; status: "starting" | "complete" | "error"; label: string }
   | { type: "generation_complete" }
@@ -11,6 +13,7 @@ export type ServerMessage =
   | { type: "reset_complete" }
   | { type: "error"; message: string };
 
+// Shape of a navigable room in the world graph
 export interface Room {
   id: string;
   name: string;
@@ -18,12 +21,14 @@ export interface Room {
   connections: { direction: string; to_room_id: string; label?: string }[];
 }
 
+// Shape of an interactive object placed in the world
 export interface WorldObject {
   id: string;
   name: string;
   description: string;
 }
 
+// Shape of an NPC placed in the world
 export interface NPC {
   id: string;
   name: string;

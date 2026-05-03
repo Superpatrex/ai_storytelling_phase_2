@@ -5,6 +5,7 @@ from src.config import STATE_DIR
 
 # Class that saves and updates the story state to the json file
 class StoryState:
+    # Initialization for the StoryState
     def __init__(self, state_file: str = "current_state.json"):
         self.state_file: str = state_file
         self.state_path: str = os.path.join(STATE_DIR, state_file)
@@ -50,19 +51,23 @@ class StoryState:
         }
         self.load()
 
+    # Method to update the key-value pair within the json file
     def update(self, key: str, value: Any) -> None:
         self.state[key] = value
         self.save()
 
+    # Method to append a value to a list in the json file
     def append_to_list(self, key: str, value: Any) -> None:
         if key not in self.state or not isinstance(self.state[key], list):
             self.state[key] = []
         self.state[key].append(value)
         self.save()
 
+    # Method to get a value from the json file or a default value if the key does not exist
     def get(self, key: str, default: Any = None) -> Any:
         return self.state.get(key, default)
 
+    # Method to load the state from the json file if it exists
     def load(self) -> None:
         if os.path.exists(self.state_path):
             try:
@@ -75,6 +80,7 @@ class StoryState:
             except Exception as e:
                 print(f"Error loading state: {e}")
 
+    # Method to save the current state to the json file
     def save(self) -> None:
         try:
             with open(self.state_path, "w") as f:

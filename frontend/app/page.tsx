@@ -4,17 +4,20 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/lib/ws";
 
+// Shape of the status response from the backend API
 interface Status {
   has_state: boolean;
   story_name: string | null;
   protagonist_name: string | null;
 }
 
+// Home page — checks for an existing saved game and offers continue or new game options
 export default function Home() {
   const router = useRouter();
   const [status, setStatus] = useState<Status | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Fetch the current game state from the backend on mount to determine which buttons to show
   useEffect(() => {
     fetch(`${API_URL}/api/status`)
       .then((r) => r.json())

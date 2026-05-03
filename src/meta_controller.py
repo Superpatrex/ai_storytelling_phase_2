@@ -5,6 +5,7 @@ from src.llm_client import LLMClient
 from src.state_manager import StoryState
 from src.config import BASE_DIR
 
+# Phases of the story generation process
 PHASE_LABELS = {
     "01_initialize": "Initializing story",
     "02_loop": "Writing story beats",
@@ -15,13 +16,15 @@ PHASE_LABELS = {
     "07_object_npc_placer": "Placing objects & characters",
 }
 
-
+# Class that controls the story generation process phases
 class MetaController:
+    # Initialization for the MetaController
     def __init__(self, progress_callback=None):
         self.llm = LLMClient()
         self.state = StoryState()
         self.progress_callback = progress_callback
 
+    # Internal method to give progress updates
     def _emit_progress(self, phase: str, status: str):
         if self.progress_callback:
             self.progress_callback({
@@ -31,20 +34,25 @@ class MetaController:
                 "label": PHASE_LABELS.get(phase, phase),
             })
 
+    # Method to run a specific phase of the story generation process
     def run_phase(self, phase_module_name: str) -> None:
         self._emit_progress(phase_module_name, "starting")
         print(f"\n--- Running Phase: {phase_module_name} ---")
         try:
+            # Make sure system path include the base directory
             if BASE_DIR not in sys.path:
                 sys.path.insert(0, BASE_DIR)
 
+            # Import the phase module and execute the main function for that phase
             module = importlib.import_module(f"src.phases.{phase_module_name}")
 
+            # Check if the module has an execute function and call it
             if hasattr(module, "execute"):
                 module.execute(self)
             else:
                 print(f"Error: Module {phase_module_name} has no execute() function.")
 
+        # Handle errors and other exceptions
         except ImportError as e:
             print(f"Error loading phase {phase_module_name}: {e}")
         except Exception as e:
@@ -54,10 +62,12 @@ class MetaController:
 
         self._emit_progress(phase_module_name, "complete")
 
+    # Method to run all the phases in sequence to generate the story and the world
     def run_all(self):
         """Run the full pre-generation pipeline to produce a game-ready world."""
         print("Starting Story & World Generation Pipeline...")
 
+        # Run each phase in this specific order
         self.run_phase("01_initialize")
         self.run_phase("02_loop")
         self.run_phase("03_fixer")
@@ -68,6 +78,7 @@ class MetaController:
 
         print("\nGeneration complete! World is ready to play.")
 
+    # Method to start the interactive game loop
     def play_game(self):
         """Start the interactive game loop using the generated world."""
         from src.runtime.game_loop import GameLoop

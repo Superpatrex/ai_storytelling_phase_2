@@ -2,12 +2,9 @@ import json
 from src.prompts import ACTION_CLASSIFIER_PROMPT, ACTION_CLASSIFIER_SCHEMA
 
 
+# Function to classify player actions and propose world state changes based on the current game context
 def classify_action(player_input: str, context: dict, llm) -> dict:
-    """
-    Classifies the player's action and proposes world state changes.
-    Returns: {action_type, triggered_plot_point_id, proposed_world_changes,
-              proposed_outcome_description, exception_reason, is_commonsense_valid}
-    """
+    # Get the current room, player state, and nearby objects and NPCs from the context
     current_room = context.get("current_room") or {}
     player_state = context.get("player_state") or {}
     room_objects = context.get("room_objects") or []
@@ -22,6 +19,7 @@ def classify_action(player_input: str, context: dict, llm) -> dict:
         if pp.get("id") not in completed
     ]
 
+    # Format exit directions and visible object/NPC names for the prompt
     exits = [
         f"{c['direction']} ({c.get('label', c['to_room_id'])})"
         for c in current_room.get("connections", [])
@@ -30,6 +28,7 @@ def classify_action(player_input: str, context: dict, llm) -> dict:
     obj_names = [o["name"] for o in room_objects if not o.get("in_inventory")]
     npc_names = [n["name"] for n in room_npcs]
 
+    # Create the prompt with the full current world context
     prompt = ACTION_CLASSIFIER_PROMPT.format(
         protagonist_name=context.get("protagonist", {}).get("Name", "The Detective"),
         goal=context.get("goal", "Solve the crime"),
@@ -46,8 +45,10 @@ def classify_action(player_input: str, context: dict, llm) -> dict:
         player_input=player_input
     )
 
+    # Generate the action classification with the LLM
     result = llm.generate_json(prompt=prompt, schema=ACTION_CLASSIFIER_SCHEMA)
 
+    # Return a safe default classification if the LLM call fails
     if not result:
         return {
             "action_type": "consistent",

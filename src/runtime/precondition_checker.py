@@ -1,26 +1,16 @@
+# Function to deterministically check whether all preconditions for a classified action are satisfied
 def check_preconditions(classification: dict, context: dict) -> dict:
-    """
-    Deterministically check whether all preconditions for a classified action are satisfied.
-    Called after classification and rule generation, before Drama Manager review.
-
-    Only meaningful for 'constituent' and 'consistent' action types.
-
-    Returns:
-        {
-            "all_met":      bool,
-            "met":          list of satisfied precondition dicts,
-            "unmet":        list of unsatisfied precondition dicts,
-            "unmet_message": str — player-facing explanation (empty if all met),
-        }
-    """
+    # Skip check for exceptional and new_rule_needed action types
     action_type = classification.get("action_type", "consistent")
     if action_type not in ("constituent", "consistent"):
         return {"all_met": True, "met": [], "unmet": [], "unmet_message": ""}
 
+    # Gather the relevant preconditions from the matched plot point or action rule
     preconditions = _gather_preconditions(classification, context)
     if not preconditions:
         return {"all_met": True, "met": [], "unmet": [], "unmet_message": ""}
 
+    # Get the player's current state for checking preconditions
     player_state = context.get("player_state", {})
     inventory   = {item.lower() for item in player_state.get("inventory", [])}
     knowledge   = [k.lower() for k in player_state.get("knowledge", [])]
@@ -28,6 +18,7 @@ def check_preconditions(classification: dict, context: dict) -> dict:
     room_npcs   = context.get("room_npcs", [])
     room_objects = context.get("room_objects", [])
 
+    # Check each precondition against the current game state
     met, unmet = [], []
     for pc in preconditions:
         if _is_satisfied(pc, inventory, knowledge, location, room_npcs, room_objects):
@@ -35,6 +26,7 @@ def check_preconditions(classification: dict, context: dict) -> dict:
         else:
             unmet.append(pc)
 
+    # Build a readable player-facing message listing which preconditions are unmet
     unmet_message = ""
     if unmet:
         parts = [pc.get("description") or pc.get("value", "") for pc in unmet]
@@ -48,15 +40,18 @@ def check_preconditions(classification: dict, context: dict) -> dict:
     }
 
 
+# Helper to collect preconditions from plot points or action rules depending on action type
 def _gather_preconditions(classification: dict, context: dict) -> list:
     action_type = classification.get("action_type")
 
+    # For constituent actions, get preconditions from the triggered plot point
     if action_type == "constituent":
         pp_id = classification.get("triggered_plot_point_id", "")
         for pp in context.get("annotated_plot_points", []):
             if pp.get("id") == pp_id:
                 return pp.get("preconditions", [])
 
+    # For consistent actions, get preconditions from the matched action rule
     elif action_type == "consistent":
         rule_id = classification.get("matched_rule_id", "")
         if rule_id:
@@ -67,6 +62,7 @@ def _gather_preconditions(classification: dict, context: dict) -> list:
     return []
 
 
+# Helper to check if a single precondition is satisfied given the current player state
 def _is_satisfied(
     pc: dict,
     inventory: set,

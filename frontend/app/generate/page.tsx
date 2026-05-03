@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { WS_URL, type ServerMessage } from "@/lib/ws";
 
+// Ordered list of generation phases matching the backend pipeline
 const PHASES = [
   { id: "01_initialize", label: "Initializing story" },
   { id: "02_loop", label: "Writing story beats" },
@@ -14,6 +15,7 @@ const PHASES = [
   { id: "07_object_npc_placer", label: "Placing objects & characters" },
 ];
 
+// Possible status values for each phase during generation
 type PhaseStatus = "pending" | "starting" | "running" | "complete" | "error";
 
 // ── Minigame ──────────────────────────────────────────────────────────────────
@@ -105,6 +107,7 @@ const WORDS = [
   "CHAPTER", "PROLOGUE", "MONOLOGUE", "DIALOGUE", "WITNESS",
 ];
 
+// Fisher-Yates shuffle that guarantees the result differs from the original word
 function scramble(word: string): string {
   const arr = word.split("");
   let result: string;
@@ -118,10 +121,12 @@ function scramble(word: string): string {
   return result;
 }
 
+// Picks a random word from the WORDS list for the minigame
 function pickWord(): string {
   return WORDS[Math.floor(Math.random() * WORDS.length)];
 }
 
+// Word unscramble minigame displayed on the right side while the story generates
 function Minigame() {
   const [word, setWord] = useState(() => pickWord());
   const [scrambled, setScrambled] = useState(() => "");
@@ -130,10 +135,12 @@ function Minigame() {
   const [score, setScore] = useState({ correct: 0, total: 0 });
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Re-scramble whenever a new word is picked
   useEffect(() => {
     setScrambled(scramble(word));
   }, [word]);
 
+  // Advances to the next word and resets input state
   const next = useCallback(() => {
     const w = pickWord();
     setWord(w);
@@ -142,6 +149,7 @@ function Minigame() {
     setTimeout(() => inputRef.current?.focus(), 50);
   }, []);
 
+  // Checks the player's answer, updates the score, and moves to the next word after a short delay
   const submit = useCallback(() => {
     if (!input.trim()) return;
     const correct = input.trim().toUpperCase() === word;
@@ -227,6 +235,7 @@ function Minigame() {
 
 // ── Generate page ─────────────────────────────────────────────────────────────
 
+// Generation page — opens a WebSocket, triggers story generation, and shows phase progress alongside the minigame
 export default function GeneratePage() {
   const router = useRouter();
   const ws = useRef<WebSocket | null>(null);
@@ -234,9 +243,11 @@ export default function GeneratePage() {
   const [connected, setConnected] = useState(false);
   const [done, setDone] = useState(false);
 
+  // Derive overall progress percentage from the number of completed phases
   const totalComplete = PHASES.filter((p) => phases[p.id] === "complete").length;
   const progressPct = Math.round((totalComplete / PHASES.length) * 100);
 
+  // Open the WebSocket on mount, kick off generation, and listen for phase progress events
   useEffect(() => {
     const socket = new WebSocket(WS_URL);
     ws.current = socket;
@@ -249,6 +260,7 @@ export default function GeneratePage() {
     socket.onmessage = (e) => {
       const msg: ServerMessage = JSON.parse(e.data);
 
+      // Update the status of whichever phase just reported progress
       if (msg.type === "generation_progress") {
         setPhases((prev) => ({ ...prev, [msg.phase]: msg.status }));
       } else if (msg.type === "generation_complete") {

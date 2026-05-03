@@ -2,9 +2,11 @@ import json
 from src.prompts import OBJECT_NPC_PLACER_PROMPT, OBJECT_NPC_PLACER_SCHEMA
 
 
+# Method to execute the object and NPC placer phase of the story generation process
 def execute(controller):
     print("  -> Starting Object & NPC Placer Phase...")
 
+    # Get the state data needed to place objects and NPCs in the world
     setting = controller.state.get("setting", {})
     characters = controller.state.get("characters", [])
     plot_points = controller.state.get("annotated_plot_points", [])
@@ -23,6 +25,7 @@ def execute(controller):
         for r in world_graph["rooms"]
     ]
 
+    # Create the prompt for the object and NPC placer with relevant context
     prompt = OBJECT_NPC_PLACER_PROMPT.format(
         setting=setting_str,
         characters=json.dumps([
@@ -41,6 +44,7 @@ def execute(controller):
 
     print("     Placing objects and NPCs in the world...")
 
+    # Generate object and NPC placements with the LLM
     data = controller.llm.generate_json(
         prompt=prompt,
         schema=OBJECT_NPC_PLACER_SCHEMA
@@ -63,6 +67,7 @@ def execute(controller):
     for npc in npcs:
         npc.setdefault("state", {"alive": True, "interrogated": False})
 
+    # Update the state with the placed objects and NPCs
     controller.state.update("objects", objects)
     controller.state.update("npcs", npcs)
 

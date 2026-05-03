@@ -2,9 +2,11 @@ import json
 from src.prompts import WORLD_BUILDER_PROMPT, WORLD_BUILDER_SCHEMA
 
 
+# Method to execute the world graph builder phase of the story generation process
 def execute(controller):
     print("  -> Starting World Graph Builder Phase...")
 
+    # Get the state data needed to build the world map
     setting = controller.state.get("setting", {})
     hidden_truth = controller.state.get("hidden_truth", {})
     plot_points = controller.state.get("annotated_plot_points", [])
@@ -13,6 +15,7 @@ def execute(controller):
         print("     No plot points found. Skipping world builder.")
         return
 
+    # Extract key locations and format the setting string for the prompt
     key_locations = hidden_truth.get("locations", [])
     setting_str = f"{setting.get('location', 'Unknown')} ({setting.get('time', 'Modern Day')})"
 
@@ -22,6 +25,7 @@ def execute(controller):
         for pp in plot_points
     ]
 
+    # Create the prompt for the world graph builder
     prompt = WORLD_BUILDER_PROMPT.format(
         setting=setting_str,
         key_locations=json.dumps(key_locations, indent=2),
@@ -30,6 +34,7 @@ def execute(controller):
 
     print("     Building navigable world graph...")
 
+    # Generate the world graph with the LLM
     data = controller.llm.generate_json(
         prompt=prompt,
         schema=WORLD_BUILDER_SCHEMA
@@ -42,6 +47,7 @@ def execute(controller):
         print("     Failed to generate world graph.")
         return
 
+    # Update the state with the generated world graph and starting room
     world_graph = {
         "rooms": rooms,
         "starting_room_id": starting_room_id

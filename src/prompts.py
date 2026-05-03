@@ -2,6 +2,7 @@
 # PHASE 1: INITIALIZATION PROMPTS
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Prompt to initialize the crime mystery story, including the hidden truth, suspects, motives, and locations.
 INIT_CRIME_PROMPT = """
 A crime has been committed. The protagonist ({protagonist_name}, the {protagonist_occupation}) must solve it.
 First, establish the hidden truth of the crime. Who did it, how did they do it, and why?
@@ -37,6 +38,7 @@ INIT_CRIME_SCHEMA = {
     "required": ["culprit_name", "motive", "method", "hidden_truth_summary", "suspects", "locations"]
 }
 
+# Prompt to establish the protagonist's goal based on the crime and dire fate if they fail.
 INIT_GOAL_PROMPT = """
 The protagonist ({protagonist_name}) is trying to solve the following crime:
 {crime_summary}

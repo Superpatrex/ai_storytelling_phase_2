@@ -1,25 +1,14 @@
 from src.state_manager import StoryState
 
 
+# Function to validate and sanitize proposed world state changes before applying them
 def validate_changes(proposed_changes: list, state: StoryState) -> dict:
-    """
-    Validate and sanitize proposed world state changes after Drama Manager approval.
-    Runs before _apply_world_changes() to strip impossible or contradictory changes.
-
-    Accepts the full StoryState (not the LLM context dict) so it can inspect all
-    objects, NPCs, rooms, and plot points — not just those visible in the current room.
-
-    Returns:
-        {
-            "valid_changes": list  — safe changes to apply,
-            "rejected":      list  — [{"change": ..., "reason": str}],
-            "warnings":      list  — non-blocking notes for debugging,
-        }
-    """
+    # Get the player's current state including location and inventory
     player_state   = state.get("player_state", {})
     inventory      = set(player_state.get("inventory", []))
     current_loc    = player_state.get("current_location_id", "")
 
+    # Build maps for quick lookup of objects, NPCs, rooms, and plot points
     obj_map   = {o["id"]: o for o in state.get("objects", [])}
     npc_map   = {n["id"]: n for n in state.get("npcs", [])}
     room_map  = {r["id"]: r for r in state.get("world_graph", {}).get("rooms", [])}
@@ -29,6 +18,7 @@ def validate_changes(proposed_changes: list, state: StoryState) -> dict:
 
     valid_changes, rejected, warnings = [], [], []
 
+    # Validate each proposed change and split into valid and rejected lists
     for change in proposed_changes:
         ctype  = change.get("type", "")
         target = change.get("target_id", "")
@@ -46,6 +36,7 @@ def validate_changes(proposed_changes: list, state: StoryState) -> dict:
     return {"valid_changes": valid_changes, "rejected": rejected, "warnings": warnings}
 
 
+# Helper to determine if a proposed change should be rejected, returning the reason or None
 def _reject_reason(
     ctype: str,
     target: str,
