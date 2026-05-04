@@ -1,44 +1,44 @@
-→ go to the west wing corridor
+→ (User Input) go to the west wing corridor
 You make your way to West Wing Corridor.
-→ go to the medical bay
+→ (User Input) go to the medical bay
 You make your way to Medical Bay.
-→ Talk to Dr. Evelyn Shaw about what she knows....
+→ (User Input) Talk to Dr. Evelyn Shaw about what she knows....
 
   Professor Holt attempts to question Dr. Evelyn Shaw about Arthur Finch's death. Dr. Shaw remains composed but is notably evasive, offering only general statements about her medical duties and expressing her condolences without providing any new leads or specific details about the incident. You sense a subtle tension in her demeanor.
-→ Look at the medical bay. Look at the presciption log, unlabeled vial, and the chemical residue
+→ (User Input) Look at the medical bay. Look at the presciption log, unlabeled vial, and the chemical residue
 
   Professor Holt's thorough investigation of the Medical Bay reveals that Dr. Shaw's digital prescription logs are conveniently inaccessible due to a 'system update.' However, during the search, a small, unlabeled vial is discovered tucked away in a back cabinet, separate from other medications, immediately raising suspicion. The shimmering chemical residue on the counter also draws attention, though its nature remains unclear.
-→ You go over to the unlabled vial and using your foot you destroy the evidence
+→ (User Input) You go over to the unlabled vial and using your foot you destroy the evidence
 
-  A voice nearby warns you: "You hesitate, your foot hovering over the small vial. A chill runs down your spine, and it's not just the draft from the blizzard outside. Destroying this, whatever it is, feels wrong. It's evidence, however small, and you've always prided yourself on following every lead, no matter how obscure. To deliberately erase something now would be to compromise the investigation, and you can't bring yourself to do it."
-→ Go over to Dr. Evelyn Shaw and ask to look at her hand for a sign of a struggle
+  (Drama Manager) A voice nearby warns you: "You hesitate, your foot hovering over the small vial. A chill runs down your spine, and it's not just the draft from the blizzard outside. Destroying this, whatever it is, feels wrong. It's evidence, however small, and you've always prided yourself on following every lead, no matter how obscure. To deliberately erase something now would be to compromise the investigation, and you can't bring yourself to do it."
+→ (User Input) Go over to Dr. Evelyn Shaw and ask to look at her hand for a sign of a struggle
 
   Dr. Evelyn Shaw recoils slightly, pulling her hands away. She gives you a cold, pointed stare. 'My hands are my own, Professor, and I see no reason to indulge such an outlandish request. Are you implying something untoward?' Her refusal and defensive tone reinforce your existing suspicions about her involvement.
-→ You notice a scratch on Dr. Evelyn Shaw's shoe that could be a fight
+→ (User Input) You notice a scratch on Dr. Evelyn Shaw's shoe that could be a fight
 
   You closely examine Dr. Evelyn Shaw's shoe. Indeed, a distinct scuff mark mars the pristine white leather, suggesting it was involved in a struggle or altercation.
-→ go to the kitchen
+→ (User Input) go to the kitchen
 You make your way to Lodge Kitchen and Room Service Prep Area.
-→ Talk to Liam Shaw about the situation
+→ (User Input) Talk to Liam Shaw about the situation
 
   You approach Liam Shaw, finding him in the staff lounge, looking agitated. When you ask him about the situation with Arthur Finch, he tenses. 'It's a tragedy, of course,' he says, avoiding eye contact. 'But I don't know anything. I was just in my quarters all evening, playing video games with Penny. Ask her, she'll tell you.' He quickly changes the subject, asking if you need anything from the kitchen, clearly eager to end the conversation.
-→ Chloe what do you know about Dr. Shaw and the vial that I found. Don't lie to me!
+→ (User Input) Chloe what do you know about Dr. Shaw and the vial that I found. Don't lie to me!
 
   Chloe's eyes widen slightly at your directness. She hesitates, then, under your intense gaze, she reveals that Dr. Shaw personally insisted on preparing and delivering a 'special blend' of herbal tea to Finch's room. Chloe recalls Dr. Shaw bypassing standard room service procedures and appearing unusually focused on the task, which now, in hindsight, provided a direct opportunity for poisoning. She shakes her head, stating she knows nothing about any vial.
-→ Tell me more about this "Special blend"
+→ (User Input) Tell me more about this "Special blend"
 
-  A voice nearby warns you: "Professor Holt, I understand your eagerness, but I think we might be jumping ahead a bit. Chloe seems a little confused about what 'special blend' you're referring to, or perhaps she's not ready to divulge more without us having a clearer picture of her involvement. We might need to find out more about that tea service first."
-→ Look at the tra and the empty herbal supplement bottle
+  (Drama Manager) A voice nearby warns you: "Professor Holt, I understand your eagerness, but I think we might be jumping ahead a bit. Chloe seems a little confused about what 'special blend' you're referring to, or perhaps she's not ready to divulge more without us having a clearer picture of her involvement. We might need to find out more about that tea service first."
+→ (User Input) Look at the tra and the empty herbal supplement bottle
 
   Professor Holt carefully examines the remnants of Arthur Finch's evening herbal tea, noting its peculiar aroma and a faint, unusual residue. He then turns his attention to the empty herbal supplement bottle. The label reveals it's a rare, imported 'Serenity Blend' known for its potent sedative properties, with a dosage warning that hints at more dangerous effects if misused. The bottle's order records clearly bear the name 'Dr. E. Shaw', and reveal a pattern of regular, high-volume purchases over several months. A chilling connection begins to form in your mind between the tea's unusual properties and the doctor's frequent orders.
-→ Talk to Chloe about the tea and how Dr. Shaw gave Arthur Finch the potentially poisoned tea
+→ (User Input) Talk to Chloe about the tea and how Dr. Shaw gave Arthur Finch the potentially poisoned tea
 
   Chloe, looking noticeably nervous, confirms your suspicions. "Yes, Professor Holt. Dr. Shaw... she insisted on preparing Mr. Finch's 'special blend' herself that evening. She bypassed standard room service protocols, which was highly unusual. She seemed intensely focused on it, almost... possessive. I remember thinking it was odd at the time, but with everything happening, I dismissed it. Now, knowing what we know, it certainly provides a direct opportunity for foul play."
-→ go to the medical bay
+→ (User Input) go to the medical bay
 You make your way to Medical Bay.
-→ Look around the room for the unlabeled vial
+→ (User Input) Look around the room for the unlabeled vial
 
   Professor Holt methodically searches the Medical Bay, his gaze sweeping over shelves and equipment. He quickly ascertains that the small, unlabeled vial he had previously noted is no longer present. Just then, Dr. Shaw enters, offering a casual explanation. 'Oh, that little bottle? I moved it to my quarters. Excellent for aromatherapy after a long day, you know.' As she speaks, Holt's eyes catch a faint, shimmering chemical residue on the shelf where the vial once sat, a detail Dr. Shaw seems to overlook in her hurried explanation.
-→ Go to the chemical residue and investigate
+→ (User Input) Go to the chemical residue and investigate
 
   Professor Holt discreetly collects a sample of the shimmering residue from the medical bay shelf. He arranges for urgent off-site forensic analysis, noting its unusual properties and the potential for it to be a crucial lead.

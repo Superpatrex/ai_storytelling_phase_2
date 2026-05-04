@@ -1,5 +1,6 @@
 # Team Holy Cow
 # Template 3: Game Engine Rule Generation
+Sorry about the video. I realized in editing that there was the zoom pictures over the slides. The final demo shows both a walkthrough of the game and a demonstration of the feature of template 3 within the game. Also `video_story.txt` has the total story that was reached within the video and `video_current_state.json` has the updated progression based on the video (if you want to use that instead of the `current_state.json` delete the `current_state.json` and rename the `video_current_state.json` to `current_state.json`)
 # Running Instructions
 ## Running from Canvas Download
 Welcome to the CIPHER (Crime Interactive Platform with Heuristic Engine Rules)! For running the story generation process from the canvas download, activate the pre-built virtual environment with `source .venv/bin/activate`. You can verify all modules are present by running `pip freeze` and comparing against the list below.
@@ -103,6 +104,20 @@ MAX_RED_HERRINGS=3
 To run the application run `python3 server.py`. This will start the server to allow the frontend and backend to communicate.
 
 To run the frontend, create a new terminal then run the following command `cd frontend` from the base directory. Then run `npm install` to install all of the necessary npm packages for the Next.js frontend. Then run `npm run dev` to then run the frontend.
+
+# Architecture
+Architecture diagrams can be found in the `diagrams/` folder:
+- `initialization_and_story_generation_diagram.png` — story initialization and generation pipeline
+- `runtime_diagram.png` — game runtime loop and drama manager
+- `frontend_diagram.png` — frontend architecture
+- `detail_addition_diagram.png` — detail addition phase
+
+The representative parts of each component can be found in the code as follows:
+- Initialization & story generation: `src/phases/`
+- Game runtime & drama manager: `src/runtime/drama_manager.py`, `src/runtime/game_loop.py`
+- Action classification & rule generation: `src/runtime/action_classifier.py`, `src/runtime/rule_generator.py`
+- Frontend: `frontend/`
+- Server/API layer: `server.py`
 
 # NOTES
 
